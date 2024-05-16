@@ -1,0 +1,26 @@
+//Fonts
+$spirit: "roboto";
+
+//Colors
+$black: #000;
+$white: #fff;
+$primaryTheme: red;
+$secondaryColor: green;
+//break-points
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px,
+);
+
+@mixin fontz($fmx, $fmn) {
+  font-size: calc(#{$fmx} + (#{$fmn} * (100vw / 1920)));
+}
+
+@mixin line($lmx, $lmn) {
+  line-height: calc(#{$lmx} + (#{$lmn} * (100vw / 1400)));
+}

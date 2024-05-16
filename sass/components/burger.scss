@@ -1,0 +1,38 @@
+.burger {
+	border: none;
+	background-color: transparent;
+	position: relative;
+	cursor: pointer;
+	z-index: 6;
+
+	span {
+		display: none;
+		width: 40px;
+		height: 4px;
+		background-color: #fff;
+		margin: 6px 0;
+		transition: 0.4s;
+
+		&.active {
+			&:nth-child(1) {
+				transform: translate(0, 10px) rotate(-45deg);
+			}
+
+			&:nth-child(2) {
+				opacity: 0;
+			}
+
+			&:nth-child(3) {
+				transform: translate(0, -10px) rotate(45deg);
+			}
+		}
+
+		@media (max-width: map-get($grid-breakpoints, xl)) {
+			display: block;
+		}
+	}
+
+	@media (max-width: map-get($grid-breakpoints, xl)) {
+		display: inline-block;
+	}
+}

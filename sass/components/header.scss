@@ -1,0 +1,109 @@
+.header {
+  ul {
+    list-style: none;
+  }
+
+  padding: 20px 0;
+  background-color: $primaryTheme;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  .container,
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media (min-width: map-get($grid-breakpoints, md)) {
+      gap: 30px;
+    }
+  }
+
+
+  &__nav {
+    [aria-current] {
+      color: $primaryTheme;
+
+      @media (hover: hover) {
+        &:hover {
+          color: $secondaryColor;
+        }
+      }
+    }
+
+    a {
+      color: white;
+      text-transform: uppercase;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      font-size: 13px;
+      font-weight: 400;
+
+      @media (hover: hover) {
+        &:hover {
+          color: $primaryTheme;
+        }
+      }
+    }
+  }
+
+
+  //__mobile
+  &__nav {
+
+    @media (max-width: map-get($grid-breakpoints, xl)) {
+      padding: 50px;
+      background-color: $primaryTheme;
+      position: fixed;
+      left: -100%;
+      top: 0;
+      bottom: 0;
+      width: 80%;
+      z-index: 1000;
+      flex-direction: column;
+      align-items: start;
+      overflow: auto;
+      transition: all .5s;
+
+      &.active {
+        left: 0;
+
+        a {
+          font-size: 16px;
+        }
+      }
+    }
+
+    // ul {
+    //   display: flex;
+    //   flex-direction: column;
+    //   gap: 20px;
+    //   align-items: flex-start;
+
+    //   &.sub-menu {
+    //     display: none;
+    //     padding: 5px 0;
+    //     margin-left: 20px;
+    //     li {
+    //       padding: 5px 0;
+    //       a {
+    //         white-space: nowrap;
+    //       }
+    //     }
+
+    //   }
+    // }
+
+    //if have submenu
+    // .menu-item-has-children {
+    // 	a {
+    // 		display: flex;
+    // 		align-items: center;
+    // 		align-items: center;
+    // 		flex-direction: row-reverse;
+    // 		justify-content: flex-end;
+    // 	}
+    // }
+  }
+}
