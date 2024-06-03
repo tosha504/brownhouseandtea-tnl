@@ -1,0 +1,29 @@
+.content-buttons {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  .button {
+    background-color: var(--dark-green);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--dark-green-hover);
+        border: 2px solid var(--dark-green-hover);
+        color: var(--white);
+      }
+    }
+    &:not(:first-child) {
+      background-color: transparent;
+      border: 2px solid var(--dark-green);
+      color: var(--dark-green);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--dark-green);
+          border: 2px solid transparent;
+          color: var(--white);
+        }
+      }
+    }
+  }
+}

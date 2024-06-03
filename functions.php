@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package start
+ * @package bht-tnl
  */
 
 if (!defined('_S_VERSION')) {
@@ -26,9 +26,9 @@ function start_setup()
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
 	 * If you're building a theme based on start, use a find and replace
-	 * to change 'start' to the name of your theme in all the template files.
+	 * to change 'bht-tnl' to the name of your theme in all the template files.
 	 */
-	load_theme_textdomain('start', get_template_directory() . '/languages');
+	load_theme_textdomain('bht-tnl', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support('automatic-feed-links');
@@ -51,7 +51,9 @@ function start_setup()
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-header' => esc_html__('Header menu', 'start'),
+			'menu-header' => esc_html__('Header menu', 'bht-tnl'),
+			'menu-header-search' => esc_html__('Header menu search', 'bht-tnl'),
+			'menu-header-shop' => esc_html__('Header menu shop', 'bht-tnl'),
 		)
 	);
 
@@ -126,9 +128,9 @@ function start_widgets_init()
 {
 	register_sidebar(
 		array(
-			'name' => esc_html__('Sidebar', 'start'),
+			'name' => esc_html__('Sidebar', 'bht-tnl'),
 			'id' => 'sidebar-1',
-			'description' => esc_html__('Add widgets here.', 'start'),
+			'description' => esc_html__('Add widgets here.', 'bht-tnl'),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget' => '</section>',
 			'before_title' => '<h2 class="widget-title">',
@@ -177,39 +179,7 @@ foreach ($realestate_includes as $file) {
 
 require_once dirname(__FILE__) . '/inc/class-tgm-plugin-activation.php';
 
-/**
- * Make ACF Options
- */
-if (function_exists('acf_add_options_page')) {
-	$option_page = acf_add_options_page([
-		'page_title' => 'General settings',
-		'menu_title' => 'General settings',
-		'menu_slug' => 'theme-general-settings',
-		'post_id' => 'options',
-		'capability' => 'edit_posts',
-		'redirect' => false
-	]);
 
-	$option_page_header = acf_add_options_page([
-		'page_title' => 'Header settings',
-		'menu_title' => 'Header settings',
-		'menu_slug' => 'theme-header-settings',
-		'post_id' => 'options_header',
-		'capability' => 'edit_posts',
-		'icon_url' => 'dashicons-admin-settings',
-		'redirect' => false
-	]);
-
-	$option_page_footer = acf_add_options_page([
-		'page_title' => 'Footer settings',
-		'menu_title' => 'Footer settings',
-		'menu_slug' => 'theme-footer-settings',
-		'post_id' => 'options_footer',
-		'capability' => 'edit_posts',
-		'icon_url' => 'dashicons-admin-settings',
-		'redirect' => false
-	]);
-}
 function acf_json_save_point()
 {
 	return get_template_directory() . '/acf-json';

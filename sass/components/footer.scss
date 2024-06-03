@@ -1,0 +1,150 @@
+.footer {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 20px 0;
+
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    padding: 40px 0;
+  }
+
+  &__after {
+    padding: 20px;
+    display: flex;
+    margin: 0 auto;
+    @media (min-width: map-get($grid-breakpoints, md)) {
+      img {
+        max-width: 540px;
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  &__left,
+  &__right {
+    flex: 1 1 100%;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      flex: 0 1 calc((100% / 2) - 20px);
+    }
+  }
+
+  &__left {
+    &_top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+
+      &-socials,
+      &_logo {
+        flex: 0 1 50%;
+      }
+
+      &-socials {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 100%;
+          height: 60px;
+          width: 60px;
+          border-radius: 50px;
+          background-color: var(--light-green);
+          img {
+            max-width: 45px;
+          }
+        }
+      }
+    }
+
+    &_menus {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      a {
+        @extend %after-border;
+        @media (hover: hover) {
+          &:hover {
+            color: var(--dark-green);
+          }
+        }
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .menu-content,
+      .menu {
+        flex: 1 1 100%;
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+          flex: 1 1 calc((100% / 2) - 20px);
+        }
+
+        h5 {
+          margin-bottom: 20px;
+          text-transform: uppercase;
+        }
+      }
+
+      .menu {
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  &__right {
+    background-color: var(--dark-green);
+    color: var(--white);
+    padding: 20px;
+    border-radius: 20px;
+
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      padding: 60px;
+      margin-left: auto;
+      max-width: 510px;
+    }
+
+    h6 {
+      font-size: clamp(35px, 5vw, 50px);
+      line-height: 1.2;
+      color: var(--white);
+      span {
+        color: var(--light-green);
+      }
+    }
+  }
+
+  &__bottom {
+    &,
+    &_left {
+      a {
+        @extend %after-border;
+        @media (hover: hover) {
+          &:hover {
+            color: var(--dark-green);
+          }
+        }
+      }
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      @media (min-width: map-get($grid-breakpoints, lg)) {
+        gap: 80px;
+      }
+    }
+    flex: 1 1 100%;
+    padding: 10px 0;
+    justify-content: space-between;
+  }
+}

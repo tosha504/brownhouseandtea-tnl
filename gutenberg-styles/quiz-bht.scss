@@ -1,0 +1,39 @@
+@use "../sass/components/_varibles" as v;
+
+.quiz-bht {
+  padding: 25px 0;
+
+  @media (min-width: map-get(v.$grid-breakpoints, md)) {
+    padding: 40px 0;
+  }
+  .container {
+    border-radius: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+  }
+
+  &__left,
+  &__right {
+    flex: 1 1 100%;
+    @media (min-width: map-get(v.$grid-breakpoints, lg)) {
+      flex: 0 1 calc((100% / 2) - 20px);
+    }
+  }
+
+  &__left {
+    padding: 20px;
+    @media (min-width: map-get(v.$grid-breakpoints, lg)) {
+      padding: 50px;
+    }
+  }
+
+  &__right {
+    transform: translateX(5%);
+    @media (min-width: map-get(v.$grid-breakpoints, lg)) {
+      transform: translateX(20px);
+    }
+  }
+}

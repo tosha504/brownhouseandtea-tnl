@@ -3,11 +3,49 @@
     list-style: none;
   }
 
-  padding: 20px 0;
-  background-color: $primaryTheme;
+  &__top-bar {
+    display: flex;
+    padding: 10px 0;
+    p,
+    a {
+      font-size: clamp(10px, 2.5vw, 16px);
+      @media (max-width: map-get($grid-breakpoints, md)) {
+        font-weight: 500;
+      }
+    }
+    p {
+      @media (min-width: map-get($grid-breakpoints, md)) {
+        margin: 0 auto;
+      }
+      margin-right: auto;
+      color: var(--white);
+    }
+    a {
+      color: var(--white);
+      span {
+        color: var(--light-green);
+      }
+    }
+  }
+
+  &__logo {
+    margin-right: auto;
+    @media (min-width: map-get($grid-breakpoints, xl)) {
+      margin: 0 auto;
+    }
+    @media (max-width: map-get($grid-breakpoints, md)) {
+      a {
+        img {
+          max-width: 90%;
+        }
+      }
+    }
+  }
+
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 6;
+  transition: 0.25s;
 
   .container,
   &__nav {
@@ -20,38 +58,114 @@
     }
   }
 
-
   &__nav {
-    [aria-current] {
-      color: $primaryTheme;
-
-      @media (hover: hover) {
-        &:hover {
-          color: $secondaryColor;
-        }
-      }
-    }
-
     a {
-      color: white;
-      text-transform: uppercase;
-      line-height: 24px;
-      letter-spacing: 0.1em;
-      font-size: 13px;
-      font-weight: 400;
-
       @media (hover: hover) {
         &:hover {
-          color: $primaryTheme;
+          background-color: red;
         }
       }
     }
   }
 
+  &__main {
+    padding: 5px 0;
+    // background: var(--cream);
+    @media (min-width: map-get($grid-breakpoints, md)) {
+      padding: 15px 0;
+    }
+    a {
+      text-transform: uppercase;
+      font-size: 14px;
+
+      @media (hover: hover) {
+        &:hover {
+          color: var(--dark-green);
+        }
+      }
+    }
+    [aria-current] {
+      color: var(--dark-geren);
+      font-weight: 500;
+      @media (hover: hover) {
+        &:hover {
+        }
+      }
+    }
+  }
+
+  &__shop-items,
+  &__nav_shop {
+    display: flex;
+  }
+
+  &__shop-items {
+    gap: 20px;
+
+    .search-link,
+    .cart-link,
+    .account-link {
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--dark-green);
+        }
+      }
+      transition: 0.3s;
+      a {
+        padding: 10px;
+        line-height: 0;
+        font-size: 0;
+        color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::before {
+          content: "";
+          width: 21px;
+          height: 21px;
+          display: block;
+        }
+      }
+    }
+
+    .search-link {
+      background: url(../assets/icons/_search.svg) no-repeat center;
+      background-color: var(--dark);
+      border-radius: 50px;
+    }
+
+    .cart-link {
+      background: url(../assets/icons/_cart.svg) no-repeat center;
+      background-color: var(--dark);
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+
+      a {
+        // border-right: 1px solid var(--white);
+        position: relative;
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          right: 0;
+          width: 1px;
+          height: 27px;
+          background: var(--white);
+          // transform: rotate(90deg);
+        }
+      }
+    }
+
+    .account-link {
+      background: url(../assets/icons/account.svg) no-repeat center;
+      background-color: var(--dark);
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+  }
 
   //__mobile
   &__nav {
-
     @media (max-width: map-get($grid-breakpoints, xl)) {
       padding: 50px;
       background-color: $primaryTheme;
@@ -64,7 +178,7 @@
       flex-direction: column;
       align-items: start;
       overflow: auto;
-      transition: all .5s;
+      transition: all 0.5s;
 
       &.active {
         left: 0;
@@ -74,36 +188,5 @@
         }
       }
     }
-
-    // ul {
-    //   display: flex;
-    //   flex-direction: column;
-    //   gap: 20px;
-    //   align-items: flex-start;
-
-    //   &.sub-menu {
-    //     display: none;
-    //     padding: 5px 0;
-    //     margin-left: 20px;
-    //     li {
-    //       padding: 5px 0;
-    //       a {
-    //         white-space: nowrap;
-    //       }
-    //     }
-
-    //   }
-    // }
-
-    //if have submenu
-    // .menu-item-has-children {
-    // 	a {
-    // 		display: flex;
-    // 		align-items: center;
-    // 		align-items: center;
-    // 		flex-direction: row-reverse;
-    // 		justify-content: flex-end;
-    // 	}
-    // }
   }
 }

@@ -2,6 +2,8 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 if (class_exists('TGM_Plugin_Activation')) {
+  var_dump('3234234');
+  require_once dirname(__FILE__) . '/class-tgm-plugin-activation.php';
   add_action('tgmpa_register', 'my_theme_register_required_plugins');
 
   /**

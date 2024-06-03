@@ -11,6 +11,24 @@
     body.toggleClass("fixed-page");
   });
 
+
+  if (body.hasClass('home')) {
+    jQuery(window).scroll(function () {
+      var scrollTop = jQuery(window).scrollTop();
+      if (scrollTop > 40) {
+        jQuery(".header").css({
+          "background": "var(--white)",
+        });
+      } else {
+        jQuery(".header").css({
+          "background": "transparent",
+        });
+      }
+    });
+  }
+
+
+
   setTimeout(function () {
     if (getCookie('popupCookie') != 'submited') {
       jQuery('.cookies').css("display", "block").hide().fadeIn(2000);

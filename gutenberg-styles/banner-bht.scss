@@ -1,0 +1,39 @@
+@use "../sass/components/_varibles" as v;
+
+.banner-bht {
+  &__wrap {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center right;
+    .content {
+      h1,
+      h2,
+      & {
+        color: var(--white);
+      }
+      padding: 180px 0 100px;
+      p {
+        line-height: 1.6;
+      }
+
+      @media (min-width: map-get(v.$grid-breakpoints, lg)) {
+        padding: 230px 0 100px;
+        max-width: 50%;
+      }
+
+      .small {
+        font-size: 14px;
+      }
+    }
+  }
+
+  position: relative;
+  .slick-dots {
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    padding: 10px;
+    border-radius: 50px;
+  }
+}

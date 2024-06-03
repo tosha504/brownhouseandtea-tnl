@@ -1,0 +1,38 @@
+@use "../sass/components/_varibles" as v;
+
+.marquee-bht {
+  display: flex;
+  color: var(--white);
+  padding: 25px 0;
+  @media (min-width: map-get(v.$grid-breakpoints, md)) {
+    padding: 40px 0;
+  }
+  .marquee {
+    padding: 20px 0;
+    font-size: 29px;
+    font-family: var((--spirit));
+    font-weight: 500;
+
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 0 0 1px #000;
+    /* Just for better visibility */
+
+    span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 60s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+  }
+}

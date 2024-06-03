@@ -18,6 +18,20 @@
     nav.toggleClass("active");
     body.toggleClass("fixed-page");
   });
+  if (body.hasClass('home')) {
+    jQuery(window).scroll(function () {
+      var scrollTop = jQuery(window).scrollTop();
+      if (scrollTop > 40) {
+        jQuery(".header").css({
+          "background": "var(--white)"
+        });
+      } else {
+        jQuery(".header").css({
+          "background": "transparent"
+        });
+      }
+    });
+  }
   setTimeout(function () {
     if (getCookie('popupCookie') != 'submited') {
       jQuery('.cookies').css("display", "block").hide().fadeIn(2000);
@@ -55,10 +69,101 @@
 
 /***/ }),
 
+/***/ "./gutenberg-styles/refill-bht.scss":
+/*!******************************************!*\
+  !*** ./gutenberg-styles/refill-bht.scss ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/tea-best-bht.scss":
+/*!********************************************!*\
+  !*** ./gutenberg-styles/tea-best-bht.scss ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./sass/index.scss":
 /*!*************************!*\
   !*** ./sass/index.scss ***!
   \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/banner-bht.scss":
+/*!******************************************!*\
+  !*** ./gutenberg-styles/banner-bht.scss ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/image-content-bht.scss":
+/*!*************************************************!*\
+  !*** ./gutenberg-styles/image-content-bht.scss ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/inspirations-bht.scss":
+/*!************************************************!*\
+  !*** ./gutenberg-styles/inspirations-bht.scss ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/marquee-bht.scss":
+/*!*******************************************!*\
+  !*** ./gutenberg-styles/marquee-bht.scss ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./gutenberg-styles/quiz-bht.scss":
+/*!****************************************!*\
+  !*** ./gutenberg-styles/quiz-bht.scss ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -155,7 +260,14 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/assets/js/index": 0,
-/******/ 			"src/index": 0
+/******/ 			"css-blocks/quiz-bht": 0,
+/******/ 			"css-blocks/marquee-bht": 0,
+/******/ 			"css-blocks/inspirations-bht": 0,
+/******/ 			"css-blocks/image-content-bht": 0,
+/******/ 			"css-blocks/banner-bht": 0,
+/******/ 			"src/index": 0,
+/******/ 			"css-blocks/tea-best-bht": 0,
+/******/ 			"css-blocks/refill-bht": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -205,8 +317,15 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["src/index"], () => (__webpack_require__("./src/index.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["src/index"], () => (__webpack_require__("./sass/index.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./src/index.js")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/banner-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/image-content-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/inspirations-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/marquee-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/quiz-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/refill-bht.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./gutenberg-styles/tea-best-bht.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css-blocks/quiz-bht","css-blocks/marquee-bht","css-blocks/inspirations-bht","css-blocks/image-content-bht","css-blocks/banner-bht","src/index","css-blocks/tea-best-bht","css-blocks/refill-bht"], () => (__webpack_require__("./sass/index.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

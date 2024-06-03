@@ -1,0 +1,43 @@
+@use "../sass/components/_varibles" as v;
+
+.image-content-bht {
+  padding: 25px 0;
+
+  @media (min-width: map-get(v.$grid-breakpoints, md)) {
+    padding: 40px 0;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__left,
+  &__right {
+    flex: 1 1 100%;
+    @media (min-width: map-get(v.$grid-breakpoints, md)) {
+      flex: 1 1 calc((100% / 2) - 20px);
+    }
+
+    p {
+      max-width: 450px;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__right {
+    display: flex;
+    img {
+      margin: 0 auto;
+      @media (min-width: map-get(v.$grid-breakpoints, md)) {
+        max-width: 550px;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const sassFilesDir = "gutenberg-styles";
-const outputCssDir = "blocks/css";
+const outputCssDir = "css-blocks";
 
 // Get an array of all SCSS files in the directory
 const scssFiles = fs
@@ -45,7 +45,7 @@ mix
   })
   .js("src/index.js", "assets/js/index.js")
   .browserSync({
-    proxy: "http://topaz.local",
+    proxy: "http://brownhouseandtea.local/",
     files: [`**/*.php`, `**/*.js`, `**/*.css`],
   });
 

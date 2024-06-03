@@ -1,17 +1,23 @@
 .button {
-	border-radius: 8px;
-	color: black;
+  border-radius: 50px;
+  color: var(--white);
+  text-transform: uppercase;
+  font-size: clamp(15px, 3vw, 15px);
+  padding: 10px 25px;
+  border: 2px solid transparent;
+  font-family: var(--filson);
+  // background-color: var(--dark-green);
+  font-weight: 300;
+  transition: 0.3s;
 
+  &__primary {
+    background-color: $secondaryColor;
 
-	&__primary {
-		padding: 10px 20px;
-		background-color: $secondaryColor;
-
-		@media (max-width: map-get($grid-breakpoints, lg)) {
-			&:hover {
-				background-color: $primaryTheme;
-				color: black;
-			}
-		}
-	}
+    // @media (max-width: map-get($grid-breakpoints, lg)) {
+    //   &:hover {
+    //     background-color: $primaryTheme;
+    //     // color: black;
+    //   }
+    // }
+  }
 }
