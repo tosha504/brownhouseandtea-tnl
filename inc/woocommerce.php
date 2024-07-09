@@ -14,13 +14,20 @@ function create_product_custom_taxonomy()
       'label' => __('Collection', 'bht-tnl'),  // Taxonomy label
       'rewrite' => array('slug' => 'collection'),
       'hierarchical' => true,  // True for categories-like, false for tags-like
+      'rewrite'           => array('slug' => 'kolekcja'),
     )
   );
 }
-// add_action('init', 'create_product_custom_taxonomy');
+add_action('init', 'create_product_custom_taxonomy');
 // dynamic_sidebar('left-sidebar');
+add_action('woocommerce_before_checkout_form', function () {
+  echo '<div class="container">';
+}, 1);
 
-
+add_action('woocommerce_after_checkout_form', function () {
+  echo '</div>';
+}, 1);
+add_action('woocommerce_checkout_before_order_review', 'woocommerce_checkout_payment', 20);
 add_action('after_setup_theme', 'bht_tnl_add_woocommerce_support', 99);
 if (!function_exists('bht_tnl_add_woocommerce_support')) {
   /**
@@ -136,6 +143,15 @@ add_action('woocommerce_before_shop_loop', 'shop_banner');
 
 function shop_banner()
 {
+  if (is_tax('collection')) {
+    $obj_tax = wp_get_object_terms(get_the_ID(), 'collection')[0];
+    $bg_shop =  !empty(get_field('image', $obj_tax->taxonomy . '_' . $obj_tax->term_id)) ? 'style="background-image: url(' . wp_get_attachment_url(get_field('image', $obj_tax->taxonomy . '_' . $obj_tax->term_id)) . ');"' : ''; ?>
+
+    <div class="container shop-banner" <?php echo $bg_shop; ?>>
+      <?php echo '<h1>' .  $obj_tax->name . '</h1>'; ?>
+    </div>
+  <?php return;
+  }
   $title = get_field('title', 'options');
   $bg_shop =  !empty(get_field('bg_shop', 'options')) ? 'style="background-image: url(' . wp_get_attachment_url(get_field('bg_shop', 'options')) . ');"' : ''; ?>
 

@@ -1,6 +1,7 @@
 body {
   &.woocommerce-shop,
-  &.tax-product_cat {
+  &.tax-product_cat,
+  &.tax-collection {
     .burger {
       border-radius: 0;
       border: none;
@@ -21,6 +22,7 @@ body {
         text-transform: capitalize;
         padding: 85px 0;
         text-align: center;
+        max-width: 800px;
       }
     }
 

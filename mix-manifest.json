@@ -1,11 +1,12 @@
 {
     "/assets/js/index.js": "/assets/js/index.js",
-    "/css-blocks/quiz-bht.css": "/css-blocks/quiz-bht.css",
     "/css-blocks/marquee-bht.css": "/css-blocks/marquee-bht.css",
+    "/css-blocks/isnspirations-bht.css": "/css-blocks/isnspirations-bht.css",
     "/css-blocks/inspirations-bht.css": "/css-blocks/inspirations-bht.css",
     "/css-blocks/image-content-bht.css": "/css-blocks/image-content-bht.css",
     "/css-blocks/banner-bht.css": "/css-blocks/banner-bht.css",
     "/src/index.css": "/src/index.css",
     "/css-blocks/tea-best-bht.css": "/css-blocks/tea-best-bht.css",
-    "/css-blocks/refill-bht.css": "/css-blocks/refill-bht.css"
+    "/css-blocks/refill-bht.css": "/css-blocks/refill-bht.css",
+    "/css-blocks/quiz-bht.css": "/css-blocks/quiz-bht.css"
 }

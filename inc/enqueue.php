@@ -56,6 +56,10 @@ function custom_block_theme_acf_enqueue_scripts()
 	if (has_block('acf/tea-best-bht', get_queried_object_id())) {
 		wp_enqueue_script('tea-best-bht', get_template_directory_uri() . "/blocks/tea-best-bht/tea-best-bht.js", array('jquery', 'slick_theme_functions'), '1.0.0', true);
 	}
+
+	if (has_block('acf/isnspirations-bht', get_queried_object_id())) {
+		wp_enqueue_script('isnspirations-bht', get_template_directory_uri() . "/blocks/isnspirations-bht/isnspirations-bht.js", array('jquery', 'slick_theme_functions'), '1.0.0', true);
+	}
 }
 add_action('wp_enqueue_scripts', 'custom_block_theme_acf_enqueue_scripts');
 add_action('admin_enqueue_scripts', 'custom_block_theme_acf_enqueue_scripts');

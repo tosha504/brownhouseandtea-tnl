@@ -1,9 +1,9 @@
 {
-  "name": "acf/inspirations-bht",
-  "title": "Inspirations-bht",
-  "description": "A custom banner block.",
+  "name": "acf/isnspirations-bht",
+  "title": "Insperacje",
+  "description": "A custom isnspirations block.",
   "style": [
-    "file:../../css-blocks/inspirations-bht.css"
+    "file:../../css-blocks/isnspirations-bht.css"
   ],
   "category": "custom-layout-category",
   "icon": "admin-site",
@@ -13,7 +13,7 @@
   ],
   "acf": {
     "mode": "edit",
-    "renderTemplate": "inspirations-bht.php"
+    "renderTemplate": "isnspirations-bht.php"
   },
   "align": "full",
   "supports": {
