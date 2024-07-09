@@ -53,7 +53,6 @@ function start_setup()
 		array(
 			'menu-header' => esc_html__('Header menu', 'bht-tnl'),
 			'menu-header-search' => esc_html__('Header menu search', 'bht-tnl'),
-			'menu-header-shop' => esc_html__('Header menu shop', 'bht-tnl'),
 		)
 	);
 
@@ -146,10 +145,10 @@ add_action('widgets_init', 'start_widgets_init');
 // add_filter('use_block_editor_for_post', '__return_false');
 
 // Theme includes directory.
-$realestate_inc_dir = 'inc';
+$bht_tnl_inc_dir = 'inc';
 
 // Array of files to include.
-$realestate_includes = array(
+$bht_tnl_includes = array(
 	'/functions-template.php',  // 	Theme custom functions
 	'/enqueue.php',				//	Enqueue scripts and styles.
 	'/custom-header.php',		//	Implement the Custom Header feature.
@@ -157,12 +156,13 @@ $realestate_includes = array(
 	'/template-tags.php',		// 	Custom template tags for this theme.
 	'/template-functions.php',	//	Functions which enhance the theme by hooking into WordPress.
 	'/acf-block-register.php',
-	'/install-plugin-formthis-theme.php'
+	'/install-plugin-formthis-theme.php',
+
 );
 
 // Load WooCommerce functions if WooCommerce is activated.
 if (class_exists('WooCommerce')) {
-	$realestate_includes[] = '/woocommerce.php';
+	$bht_tnl_includes[] = '/woocommerce.php';
 }
 
 /**
@@ -173,8 +173,8 @@ if (defined('JETPACK__VERSION')) {
 }
 
 // Include files.
-foreach ($realestate_includes as $file) {
-	require_once get_theme_file_path($realestate_inc_dir . $file);
+foreach ($bht_tnl_includes as $file) {
+	require_once get_theme_file_path($bht_tnl_inc_dir . $file);
 }
 
 require_once dirname(__FILE__) . '/inc/class-tgm-plugin-activation.php';
@@ -231,4 +231,79 @@ function fix_svg_thumb_display()
 			height: auto !important;
 		}
 	</style>';
+}
+
+
+add_filter('woocommerce_single_product_carousel_options', 'filter_single_product_carousel_options');
+function filter_single_product_carousel_options($options)
+{
+	// if (wp_is_mobile()) {
+	$options['smoothHeight'] = true; // Already "true" by default
+	$options['controlNav'] = 'thumbnails'; // Option 'thumbnails' by default
+	$options['animation'] = "slide"; // Already "slide" by default
+	$options['slideshow'] = true; // Already "false" by default
+	$options['smoothHeight']  = false;
+	// $options['randomize']  = false;
+	$options['easing']  = "swing";
+	// $options["directionNav"] = true;
+	$options["manualControls"] = ".flex-control-nav";
+	// }randomize: false,
+	return $options;
+}
+
+
+function get_min_amount_shipping($country_name = null)
+{
+	$shipping_zones = WC_Shipping_Zones::get_zones();
+	foreach ($shipping_zones as $zone_id => $zone) {
+		// Check if the current zone matches the specified zone name
+		$shipping_methods = $zone['shipping_methods'];
+
+		// Loop through shipping methods to find free shipping
+		foreach ($shipping_methods as $method) {
+			if ($method->id === 'free_shipping' && $method->enabled === "yes") {
+				// Return the minimum amount for free shipping
+				return $method->min_amount;
+			}
+		}
+	}
+}
+
+function get_free_shipping_amount_for_zone()
+{
+
+	$current_IP = get_current_IP()['countryCode'];
+	// if ($current_IP !== "CZ") {
+	// 	return;
+	// };
+	$custom_user_meta = get_user_meta(get_current_user_id(), 'billing_country', true);
+	// if (count(WC()->cart->get_cart()) === 0) {
+	// 	echo 'Darmowa wysyłka za zakupy za minimum 199 zł';
+	// 	var_dump(!$custom_user_meta);
+	// 	return;
+	// }
+	if (!$custom_user_meta) {
+		return		get_min_amount_shipping();
+	};
+
+	$country_name = WC()->countries->countries[$custom_user_meta];
+	// Get all shipping zones
+
+	return get_min_amount_shipping($country_name);
+
+	// Return false if no free shipping is found or if it does not apply
+	return false;
+}
+add_action('widgets_init', 'register_my_widgets');
+
+function register_my_widgets()
+{
+
+	register_sidebar([
+		'name' => 'The left sidebar of the shop',
+		'id' => 'left-sidebar',
+		'description' => 'These widgets will be shown in the right column of the site',
+		'before_title' => '<h2>',
+		'after_title' => '</h2>'
+	]);
 }

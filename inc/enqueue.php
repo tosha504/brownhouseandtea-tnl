@@ -10,11 +10,18 @@ defined('ABSPATH') || exit;
 if (!function_exists('start_scripts')) {
 	function start_scripts()
 	{
+		if (!wp_script_is("wc-cart-fragments", "enqueued") && wp_script_is("wc-cart-fragments", "registered")) {
+
+			// Enqueue the wc-cart-fragments script
+
+			wp_enqueue_script("wc-cart-fragments");
+		}
+
 		$theme_uri = get_template_directory_uri();
 		// Custom JS
 		wp_register_script('slick_theme_functions', $theme_uri . '/libery/slick.min.js', ['jquery'], false, true);
 		wp_enqueue_script('slick_theme_functions');
-
+		// wp_enqueue_script('custom-product-js', get_template_directory_uri() . '/src/js/custom-product.js', array('jquery'), '', true);
 
 		wp_enqueue_script('start_functions', $theme_uri . '/src/index.js', ['jquery'], time(), true);
 		wp_localize_script('start_functions', 'localizedObject', [

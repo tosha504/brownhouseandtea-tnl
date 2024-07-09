@@ -1,0 +1,101 @@
+.blog-bht {
+  padding: 50px 0;
+  .container {
+  }
+
+  &__items {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    .cta,
+    .item {
+      flex: 1 1 100%;
+      @media (min-width: map-get($grid-breakpoints, md)) {
+        flex: 0 1 calc((100% / 2) - 30px);
+      }
+      @media (min-width: map-get($grid-breakpoints, xl)) {
+        flex: 1 1 calc((100% / 3) - 30px);
+      }
+      border-radius: 20px;
+      overflow: hidden;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cta {
+      padding: 30px 20px;
+      @media (min-width: map-get($grid-breakpoints, lg)) {
+        padding: 50px;
+      }
+      background: var(--light-green);
+
+      &__pre-title {
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      &__title {
+        font-size: 45px;
+        margin-bottom: 200px;
+        @media (min-width: map-get($grid-breakpoints, md)) {
+          margin-bottom: auto;
+        }
+      }
+
+      &__btn {
+        a {
+          width: fit-content;
+          font-size: 17px;
+          text-transform: uppercase;
+          padding: 10px 30px;
+          border: 2px solid var(--dark-green);
+          border-radius: 50px;
+          font-weight: 500;
+          transition: 0.3s;
+          @media (hover: hover) {
+            &:hover {
+              color: var(--white) !important;
+              background-color: var(--dark-green);
+            }
+          }
+        }
+      }
+    }
+
+    .item {
+      transition: 0.25s;
+      @media (hover: hover) {
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      img {
+        min-height: 235px;
+        object-fit: cover;
+        transition: 0.3s;
+      }
+
+      box-shadow: 2px 4px 12px #00000014;
+      &__wrap {
+        padding: 35px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        h5 {
+          font-size: 28px;
+        }
+
+        .descr {
+          color: rgba(#1f3f2f, 0.53);
+        }
+
+        span {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

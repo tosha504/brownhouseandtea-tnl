@@ -21,6 +21,34 @@ function footer_templates()
   }
 }
 
+function single_product_acf_templates_left()
+{
+  if (have_rows('additional_info_left_column', get_the_ID())) {
+    while (have_rows('additional_info_left_column',  get_the_ID())) {
+      the_row();
+      if (get_row_layout() == 'text_content') {
+        get_template_part('builder-templates/single-product-page/text-content');
+      } elseif (get_row_layout() == 'image') {
+        get_template_part('builder-templates/single-product-page/image');
+      }
+    }
+  }
+}
+
+function single_product_acf_templates_right()
+{
+  if (have_rows('additional_info_right_column', get_the_ID())) {
+    while (have_rows('additional_info_right_column',  get_the_ID())) {
+      the_row();
+      if (get_row_layout() == 'text_content') {
+        get_template_part('builder-templates/single-product-page/text-content');
+      } elseif (get_row_layout() == 'image') {
+        get_template_part('builder-templates/single-product-page/image');
+      }
+    }
+  }
+}
+
 function my_custom_image($attachment_id)
 {
   echo wp_get_attachment_image($attachment_id, 'full', false, ['alt' => get_post_meta($attachment_id, '_wp_attachment_image_alt', true), 'loading' => 'lazy', 'title' => get_the_title($attachment_id)]);
@@ -42,4 +70,25 @@ function create_buttons($banner_buttons)
       } ?>
     </div>
 <?php }
+}
+
+
+function getGeoIP($ip)
+{
+  $url = "http://ip-api.com/json/" . $ip;
+  $curlHandle = curl_init();
+  curl_setopt($curlHandle, CURLOPT_URL, $url);
+  curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+  $response = curl_exec($curlHandle);
+  curl_close($curlHandle);
+  $data = json_decode($response, true);
+
+  return $data;
+}
+function get_current_IP()
+{
+  // $ip = $_SERVER['REMOTE_ADDR']; // Replace this with the IP address you want to query
+  $ip = '94.23.175.16';
+  $geoData = getGeoIP($ip);
+  return $geoData;
 }

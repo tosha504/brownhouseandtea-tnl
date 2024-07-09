@@ -22,6 +22,7 @@
     }
     a {
       color: var(--white);
+      margin-left: auto;
       span {
         color: var(--light-green);
       }
@@ -44,7 +45,7 @@
 
   position: sticky;
   top: 0;
-  z-index: 6;
+  z-index: 5;
   transition: 0.25s;
 
   .container,
@@ -60,9 +61,11 @@
 
   &__nav {
     a {
+      @extend %after-border;
+      background-image: linear-gradient(0, var(--dark), var(--dark)) !important;
       @media (hover: hover) {
         &:hover {
-          background-color: red;
+          color: var(--dark) !important;
         }
       }
     }
@@ -77,6 +80,8 @@
     a {
       text-transform: uppercase;
       font-size: 14px;
+      color: var(--dark);
+      font-weight: 400;
 
       @media (hover: hover) {
         &:hover {
@@ -153,6 +158,26 @@
           background: var(--white);
           // transform: rotate(90deg);
         }
+        .count {
+          z-index: 20;
+          display: block;
+          width: 20px;
+          height: 20px;
+          // top: -5px;
+          // right: -5px;
+          // top: 50%;
+          left: -5px;
+          top: -5px;
+          // transform: translateY(-50%);
+          color: var(--dark);
+          font-size: 13px !important;
+          background: var(--light-green);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50px;
+          position: absolute;
+        }
       }
     }
 
@@ -168,12 +193,12 @@
   &__nav {
     @media (max-width: map-get($grid-breakpoints, xl)) {
       padding: 50px;
-      background-color: $primaryTheme;
+      background-color: var(--white);
       position: fixed;
       left: -100%;
       top: 0;
       bottom: 0;
-      width: 80%;
+
       z-index: 1000;
       flex-direction: column;
       align-items: start;
@@ -181,6 +206,10 @@
       transition: all 0.5s;
 
       &.active {
+        width: 75vw;
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+          width: 50vw;
+        }
         left: 0;
 
         a {

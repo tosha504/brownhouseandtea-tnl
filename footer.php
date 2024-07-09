@@ -76,6 +76,7 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 </div>
 
 </div><!-- #page -->
+<div class="overlay"></div>
 
 <?php wp_footer(); ?>
 

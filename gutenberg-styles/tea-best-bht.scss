@@ -124,29 +124,32 @@
       background-color: var(--cream);
       border-radius: 20px;
       position: relative;
-      // overflow: hidden;
       img {
-        position: absolute;
-        right: -70px;
-        top: 50%;
-        transform-origin: left;
-        animation: rotateAnimation 9s linear infinite;
+        display: none;
+        @media (min-width: map-get(v.$grid-breakpoints, lg)) {
+          display: block;
+          position: absolute;
+          right: -70px;
+          top: 50%;
+          transform-origin: left;
+          animation: rotateAnimation 9s linear infinite;
 
-        @keyframes rotateAnimation {
-          0% {
-            transform: translateY(-50%) rotate(-15deg);
-          }
-          25% {
-            transform: translateY(-50%) rotate(8deg);
-          }
-          50% {
-            transform: translateY(-50%) rotate(25deg);
-          }
-          75% {
-            transform: translateY(-50%) rotate(8deg);
-          }
-          100% {
-            transform: translateY(-50%) rotate(-15deg);
+          @keyframes rotateAnimation {
+            0% {
+              transform: translateY(-50%) rotate(-15deg);
+            }
+            25% {
+              transform: translateY(-50%) rotate(8deg);
+            }
+            50% {
+              transform: translateY(-50%) rotate(25deg);
+            }
+            75% {
+              transform: translateY(-50%) rotate(8deg);
+            }
+            100% {
+              transform: translateY(-50%) rotate(-15deg);
+            }
           }
         }
       }
