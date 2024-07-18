@@ -36,7 +36,22 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 		<?php do_action('woocommerce_checkout_before_customer_details'); ?>
 		<?php do_action('woocommerce_checkout_billing'); ?>
+		<div class="col-lg-6">
+			<h3 class="stepCheckout-title"><?php echo __('2. Shipping', 'understrap'); ?></h3>
+			<?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
+				<div class="ajax-shipp-method">
+					<?php do_action('woocommerce_review_order_before_shipping'); ?>
 
+					<?php wc_cart_totals_shipping_html(); ?>
+
+					<?php do_action('woocommerce_review_order_after_shipping'); ?>
+				</div>
+
+			<?php endif; ?>
+			<h3 class="stepCheckout-title"><?php echo __('3. Payments', 'understrap'); ?></h3>
+			<?php do_action('custom_payment_position'); ?>
+
+		</div>
 		<?php do_action('woocommerce_checkout_shipping'); ?>
 
 		<?php do_action('woocommerce_checkout_after_customer_details'); ?>
