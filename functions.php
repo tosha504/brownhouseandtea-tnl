@@ -325,6 +325,7 @@ function filter_update_order_review_fragments($fradments)
 		</div>
 <?php
 	endif;
+
 	$fradments['.ajax-shipp-method'] = ob_get_clean();
 
 	return $fradments;

@@ -1,5 +1,190 @@
 body {
   &.woocommerce-checkout {
-    background-color: #ecf8e3;
+    background-color: var(--light-green-opacity);
+
+    .site-main {
+      .container {
+        .woocommerce-error {
+          margin: 0;
+        }
+
+        margin: 50px auto;
+        .woocommerce-form-login-toggle {
+          .woocommerce-info {
+            padding: 1em 2em;
+            margin: 0 0 2em;
+            position: relative;
+            background-color: var(--dark-green);
+            color: var(--white);
+            border-top: none;
+            list-style: none outside;
+            width: auto;
+            max-width: 400px;
+            word-wrap: break-word;
+            font-size: 14px;
+            border-radius: 50px;
+
+            &::before {
+              content: none;
+            }
+
+            .showlogin {
+              color: var(--light-green);
+            }
+          }
+        }
+
+        .woocommerce-billing-fields__field-wrapper {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            width: 100%;
+          }
+        }
+
+        .checkout {
+          &.woocommerce-checkout {
+            display: flex;
+            gap: 30px 100px;
+            flex-wrap: wrap;
+            .woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+              flex: 1 1 100%;
+            }
+
+            #payment {
+              background: transparent;
+              .wc_payment_methods.payment_methods.methods {
+                border-bottom: none;
+              }
+            }
+
+            #shipping_method {
+              padding: 1em;
+
+              li {
+                &,
+                label {
+                  display: flex;
+                }
+
+                label {
+                  width: 100%;
+                  max-width: 300px;
+                  .woocommerce-Price-amount.amount {
+                    margin-left: auto;
+                  }
+                }
+              }
+            }
+
+            .left,
+            .right {
+              flex: 1 1 100%;
+              @media (min-width: map-get($grid-breakpoints, lg)) {
+                flex: 1 1 calc(50% - 100px);
+              }
+            }
+
+            .left {
+              display: flex;
+              gap: 10px;
+              flex-direction: column;
+            }
+
+            .right {
+              padding: 20px;
+              @media (min-width: map-get($grid-breakpoints, md)) {
+                padding: 40px;
+              }
+              background-color: var(--white);
+              border-radius: 30px;
+              height: fit-content;
+
+              #place_order {
+                background-color: var(--light-green);
+                width: 100%;
+                text-align: center;
+                border-radius: 50px;
+                font-family: var(--filson);
+                font-weight: 500;
+                color: var(--dark-green);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+/* Style for the Select2 container */
+.select2-container--default .select2-selection--single {
+  background-color: var(--light-green-opacity);
+  /* Background color */
+  border: 1px solid var(--dark-green); /* Border style */
+  border-radius: 50px; /* Rounded corners */
+  padding: 20px; /* Padding inside the select box */
+  font-size: 16px; /* Font size */
+  width: 100%; /* Full width */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.select2-container--default .select2-selection--single[aria-expanded="true"] {
+  border-radius: 50px !important;
+}
+
+/* Style for the Select2 dropdown */
+.select2-container--default .select2-results__option {
+  background-color: #fff; /* Background color */
+  color: #333; /* Text color */
+  padding: 8px; /* Padding */
+  font-size: 16px; /* Font size */
+  border: none;
+}
+
+/* Style for the Select2 container when focused */
+// .select2-container--default .select2-selection--single:focus,
+// .select2-container--default .select2-selection--single:hover {
+//   border-color: #007cba; /* Border color on focus */
+//   box-shadow: 0 0 5px rgba(0, 124, 186, 0.5); /* Box shadow on focus */
+//   outline: none; /* Remove the default outline */
+// }
+
+/* Additional customization */
+.select2-container--default .select2-selection--single {
+  font-family: "Arial", sans-serif; /* Font style */
+  margin: 5px 0; /* Margin around the select box */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+.select2-dropdown.select2-dropdown--below {
+  background-color: var(--light-green-opacity);
+  border-radius: 19px;
+  padding: 10px;
+  // top: -10px;
+  .select2-search.select2-search--dropdown {
+    display: none;
+  }
+
+  .select2-results__options {
+    .select2-results__option {
+      background-color: var(--light-green-opacity);
+    }
+
+    .select2-results__option--highlighted[aria-selected] {
+      background-color: var(
+        --dark-green
+      ); /* Background color for highlighted option */
+      color: white;
+      border-radius: 20px; /* Text color for highlighted option */
+    }
   }
 }

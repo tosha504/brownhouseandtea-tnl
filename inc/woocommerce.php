@@ -27,7 +27,18 @@ add_action('woocommerce_before_checkout_form', function () {
 add_action('woocommerce_after_checkout_form', function () {
   echo '</div>';
 }, 1);
-add_action('woocommerce_checkout_before_order_review', 'woocommerce_checkout_payment', 20);
+// add_action('woocommerce_checkout_before_order_review', 'woocommerce_checkout_payment', 20);
+
+remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+add_action('custom_payment_position', 'woocommerce_checkout_payment', 20);
+add_filter('woocommerce_checkout_fields', 'remove_billing_address_2');
+
+function remove_billing_address_2($fields)
+{
+  unset($fields['billing']['billing_address_2']);
+  unset($fields['billing']['billing_state']);
+  return $fields;
+}
 add_action('after_setup_theme', 'bht_tnl_add_woocommerce_support', 99);
 if (!function_exists('bht_tnl_add_woocommerce_support')) {
   /**
@@ -295,8 +306,16 @@ function cart_update_qty_script()
   endif;
 }
 add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
+add_action('woocommerce_checkout_order_review', 'test', 1);
+function test()
+{ ?>
+  <div>
+    <?php
+    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
 
-
+    echo "Brakuje Ci jeszcze <b>" . $min_amount . "zł</b> aby cieszyć się <b>darmową wysyłką!</b>"; ?>
+  </div>
+<?php }
 function woocommerce_header_add_to_cart_fragment($fragments)
 {
   global $woocommerce;

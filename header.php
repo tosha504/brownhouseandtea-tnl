@@ -117,23 +117,23 @@
 			$shipping_zones = WC_Shipping_Zones::get_zones();
 			$free_shipping_minimums = array();
 
-			// foreach ($shipping_zones as $zone_id => $zone) {
-			// 	// Get all shipping methods for the current zone
-			// 	$shipping_methods = $zone['shipping_methods'];
+			foreach ($shipping_zones as $zone_id => $zone) {
+				// Get all shipping methods for the current zone
+				$shipping_methods = $zone['shipping_methods'];
 
-			// 	foreach ($shipping_methods as $method) {
-			// 		if ($method->id === 'free_shipping') {
-			// 			// Check if free shipping has a minimum amount condition
-			// 			if (isset($method->instance_settings['requires']) && $method->instance_settings['requires'] === 'min_amount') {
-			// 				$minimum_amount = $method->instance_settings['min_amount'];
-			// 				$free_shipping_minimums[$zone['zone_name']] = $minimum_amount;
-			// 			}
-			// 		}
-			// 	}
-			// }
+				foreach ($shipping_methods as $method) {
+					if ($method->id === 'free_shipping') {
+						// Check if free shipping has a minimum amount condition
+						if (isset($method->instance_settings['requires']) && $method->instance_settings['requires'] === 'min_amount') {
+							$minimum_amount = $method->instance_settings['min_amount'];
+							$free_shipping_minimums[$zone['zone_name']] = $minimum_amount;
+						}
+					}
+				}
+			}
 			// var_dump($shipping_zones);
 
-			// return $free_shipping_minimums;
+			return $free_shipping_minimums;
 		}
 
 		// Use this function to get the free shipping minimums
