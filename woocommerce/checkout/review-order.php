@@ -31,17 +31,75 @@ defined('ABSPATH') || exit;
 			if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
 		?>
 				<tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
-					<td class="product-name">
-						<?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)) . '&nbsp;'; ?>
-						<?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						?>
-						<?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+					<td class="product-thumbnail">
+						<?php
+						$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
+						if (!$_product->get_permalink()) {
+							echo $thumbnail; // PHPCS: XSS ok.
+						} else {
+							printf('<a href="%s">%s</a>', esc_url($_product->get_permalink()), $thumbnail); // PHPCS: XSS ok.
+						}
 						?>
 					</td>
-					<td class="product-total">
-						<?php echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						?>
+
+					<td class="product-name-quantity">
+						<div class="product-name">
+							<?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key))  ?>
+							<?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							?>
+						</div>
+
+						<div class="product-quantity" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
+							<?php
+							if ($_product->is_sold_individually()) {
+								$min_quantity = 1;
+								$max_quantity = 1;
+							} else {
+								$min_quantity = 0;
+								$max_quantity = $_product->get_max_purchase_quantity();
+							}
+
+							$product_quantity = woocommerce_quantity_input(
+								array(
+									'input_name'   => "cart[{$cart_item_key}][qty]",
+									'input_value'  => $cart_item['quantity'],
+									'max_value'    => $max_quantity,
+									'min_value'    => $min_quantity,
+									'product_name' => $_product->get_name(),
+								),
+								$_product,
+								false
+							);
+
+							echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item); // PHPCS: XSS ok.
+							?>
+						</div>
 					</td>
+
+					<td class="wrap">
+						<div class="product-remove">
+							<?php
+							echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								'woocommerce_cart_item_remove_link',
+								sprintf(
+									'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+									esc_url(wc_get_cart_remove_url($cart_item_key)),
+									esc_html__('Remove this item', 'woocommerce'),
+									esc_attr($_product->get_id()),
+									esc_attr($_product->get_sku())
+								),
+								$cart_item_key
+							);
+							?>
+						</div>
+
+						<div class="product-total">
+							<?php echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							?>
+						</div>
+					</td>
+
 				</tr>
 		<?php
 			}
