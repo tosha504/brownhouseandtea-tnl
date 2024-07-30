@@ -109,14 +109,15 @@ h2 {
   }
 
   @media (min-width: map-get($grid-breakpoints, lg)) {
-    max-width: 950px;
   }
 
   @media (min-width: map-get($grid-breakpoints, xl)) {
-    max-width: 1200px;
+    max-width: 1257px;
+    padding: 0 15px;
   }
 
   @media (min-width: map-get($grid-breakpoints, xxl)) {
+    padding: 0;
   }
 }
 

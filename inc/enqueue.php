@@ -11,7 +11,6 @@ if (!function_exists('start_scripts')) {
 	function start_scripts()
 	{
 		if (!wp_script_is("wc-cart-fragments", "enqueued") && wp_script_is("wc-cart-fragments", "registered")) {
-
 			// Enqueue the wc-cart-fragments script
 
 			wp_enqueue_script("wc-cart-fragments");
@@ -24,6 +23,7 @@ if (!function_exists('start_scripts')) {
 			);
 			wp_localize_script('checkout_script', 'add_quantity', $localize_script);
 		}
+
 		$theme_uri = get_template_directory_uri();
 		// Custom JS
 		wp_register_script('slick_theme_functions', $theme_uri . '/libery/slick.min.js', ['jquery'], false, true);
@@ -77,14 +77,24 @@ add_action('wp_ajax_nopriv_update_order_review', 'update_order_review');
 
 function update_order_review()
 {
-	$values = array();
-	parse_str($_POST['post_data'], $values);
-	$cart = $values['cart'];
-	foreach ($cart as $cart_key => $cart_value) {
+	// $values = array();
+	// parse_str($_POST['post_data'], $values);
+	// $cart = $values['cart'];
 
-		WC()->cart->set_quantity($cart_key, $cart_value['qty'],);
-		WC()->cart->calculate_totals();
-		woocommerce_cart_totals();
-	}
+	// foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+	// 	WC()->cart->set_quantity($cart_item_key, $cart_item['qty'],);
+	// }
+
+
+
+	// print_r($_POST);
+	WC()->cart->cart_contents[$_POST['key']]['quantity'] = $_POST['qty'];
+	WC()->cart->calculate_totals();
+
+	$cart_fragments = apply_filters('woocommerce_add_to_cart_fragments', false);
+	echo json_encode($cart_fragments);
+
+	// woocommerce_cart_totals();
+
 	wp_die();
 }

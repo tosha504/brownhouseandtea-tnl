@@ -28,8 +28,7 @@ defined('ABSPATH') || exit;
 		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 			$_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 
-			if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
-		?>
+			if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) { ?>
 				<tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
 
 					<td class="product-thumbnail">
@@ -62,7 +61,7 @@ defined('ABSPATH') || exit;
 
 							$product_quantity = woocommerce_quantity_input(
 								array(
-									'input_name'   => "cart[{$cart_item_key}][qty]",
+									'input_name'   => $cart_item_key,
 									'input_value'  => $cart_item['quantity'],
 									'max_value'    => $max_quantity,
 									'min_value'    => $min_quantity,
@@ -115,7 +114,7 @@ defined('ABSPATH') || exit;
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 
-		<?php foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
+		<?php foreach (WC()->cart->get_coupons() as $code => $coupon) : var_dump($coupon) ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
 				<th><?php wc_cart_totals_coupon_label($coupon); ?></th>
 				<td><?php wc_cart_totals_coupon_html($coupon); ?></td>

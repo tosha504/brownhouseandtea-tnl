@@ -271,11 +271,6 @@ function get_min_amount_shipping($country_name = null)
 
 function get_free_shipping_amount_for_zone()
 {
-
-	$current_IP = get_current_IP()['countryCode'];
-	// if ($current_IP !== "CZ") {
-	// 	return;
-	// };
 	$custom_user_meta = get_user_meta(get_current_user_id(), 'billing_country', true);
 	// if (count(WC()->cart->get_cart()) === 0) {
 	// 	echo 'Darmowa wysyłka za zakupy za minimum 199 zł';
@@ -283,7 +278,7 @@ function get_free_shipping_amount_for_zone()
 	// 	return;
 	// }
 	if (!$custom_user_meta) {
-		return		get_min_amount_shipping();
+		return get_min_amount_shipping();
 	};
 
 	$country_name = WC()->countries->countries[$custom_user_meta];
@@ -330,3 +325,46 @@ function filter_update_order_review_fragments($fradments)
 
 	return $fradments;
 }
+
+function hide_shipping_when_free_is_available($rates, $package)
+{
+	// Initialize variables
+	$free_shipping_available = false;
+	$min_amount = null;
+
+	// Loop through the rates to find free shipping
+	foreach ($rates as $rate_id => $rate) {
+		if ('free_shipping' === $rate->method_id) {
+			// Get the settings for the free shipping rate
+			$free_shipping = new WC_Shipping_Free_Shipping($rate->instance_id);
+			$min_amount = $free_shipping->min_amount;
+			// Check if cart total meets or exceeds the minimum amount for free shipping
+			var_dump(intval(WC()->cart->cart_contents_total), intval($min_amount));
+			if (intval(WC()->cart->cart_contents_total) >= intval($min_amount)) {
+				$free_shipping_available = true;
+				break;
+			}
+		}
+	}
+
+	// Modify rates if free shipping is available
+	if ($free_shipping_available) {
+		$new_rates = [];
+
+		// Include free shipping in the new rates
+		foreach ($rates as $rate_id => $rate) {
+			if ('free_shipping' === $rate->method_id) {
+				$new_rates[$rate_id] = $rate;
+			} elseif ('local_pickup' === $rate->method_id) {
+				// Optionally include local pickup
+				$new_rates[$rate_id] = $rate;
+			}
+		}
+
+		return $new_rates; // Return modified rates
+	}
+	error_log(print_r($rates, true));
+	return $rates; // Return all rates if free shipping isn't available
+}
+
+add_filter('woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2);

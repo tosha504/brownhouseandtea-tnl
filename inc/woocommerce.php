@@ -30,6 +30,7 @@ add_action('woocommerce_after_checkout_form', function () {
 // add_action('woocommerce_checkout_before_order_review', 'woocommerce_checkout_payment', 20);
 
 remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
 add_action('custom_payment_position', 'woocommerce_checkout_payment', 20);
 add_filter('woocommerce_checkout_fields', 'remove_billing_address_2');
 
@@ -269,7 +270,7 @@ add_action('woocommerce_before_shop_loop_item_title', function () {
 }, 9);
 add_action('woocommerce_before_shop_loop_item_title', function () {
   echo '</div>';
-}, 11);;
+}, 11);
 
 
 
@@ -289,17 +290,25 @@ add_action('woocommerce_before_shop_loop_item_title', function () {
 add_action('wp_footer', 'cart_update_qty_script');
 function cart_update_qty_script()
 {
-  if (is_cart()) :
+  if (is_checkout()) :
   ?>
     <script>
       let timeout;
-      jQuery('.woocommerce').on('change', 'input.qty', function() {
+      jQuery('.checkout.woocommerce-checkout').on('change', 'input.qty', function() {
         if (timeout !== undefined) {
           clearTimeout(timeout);
         }
         timeout = setTimeout(function() {
-          jQuery("[name='update_cart']").trigger("click"); // trigger cart update
+          jQuery('.cart-qty.plus, .minus').attr('disabled', true) // trigger cart update
+
+
+
         }, 100); // 1 second delay, half a second (500) seems comfortable too
+        // jQuery(document.body).trigger('wc_fragment_refresh');
+        setTimeout(function() {
+          jQuery(document.body).trigger('wc_fragment_refresh'); // Refresh the cart fragments
+
+        }, 1000);
       });
     </script>
   <?php
@@ -309,12 +318,13 @@ add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_
 add_action('woocommerce_checkout_order_review', 'test', 1);
 function test()
 { ?>
-  <div>
-    <?php
-    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
+  <div class="free-shippinge"></div>
+  <?php
+  // $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
 
-    echo "Brakuje Ci jeszcze <b>" . $min_amount . "zł</b> aby cieszyć się <b>darmową wysyłką!</b>"; ?>
-  </div>
+  // echo "Brakuje Ci jeszcze <b>" . $min_amount . "zł</b> aby cieszyć się <b>darmową wysyłką!</b>";
+
+  ?>
 <?php }
 function woocommerce_header_add_to_cart_fragment($fragments)
 {
@@ -330,11 +340,12 @@ function woocommerce_header_add_to_cart_fragment($fragments)
   <div>
     <?php
     $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
-
-    echo "Brakuje Ci jeszcze <b>" . $min_amount . "zł</b> aby cieszyć się <b>darmową wysyłką!</b>"; ?>
+    // var_dump(get_free_shipping_amount_for_zone() - WC()->cart->get_cart_subtotal());
+    $min_amount = wc_price($min_amount);
+    echo "Brakuje Ci jeszcze " . $min_amount . " aby cieszyć się <b>darmową wysyłką!</b>"; ?>
   </div>
 <?php
-  $fragments['.free-shippinge'] = ob_get_clean();
+  $fragments['div.free-shippinge'] = ob_get_clean();
 
   return $fragments;
 }

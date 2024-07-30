@@ -49,7 +49,11 @@ body {
         .checkout {
           &.woocommerce-checkout {
             display: flex;
-            gap: 30px 100px;
+            gap: 30px 50px;
+            @media (min-width: map-get($grid-breakpoints, xl)) {
+              gap: 30px 100px;
+            }
+
             flex-wrap: wrap;
             .woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
               flex: 1 1 100%;
@@ -112,6 +116,125 @@ body {
                 font-family: var(--filson);
                 font-weight: 500;
                 color: var(--dark-green);
+              }
+
+              table {
+                border: none;
+
+                tbody,
+                tfoot {
+                  display: flex;
+                }
+
+                tbody {
+                  flex-direction: column;
+                  gap: 10px;
+                  tr {
+                    &.cart_item {
+                      display: flex;
+                      td {
+                        border-top: none;
+                        &.product-thumbnail {
+                          padding: 0;
+                          img {
+                            border-radius: 20px;
+                            object-fit: cover;
+                          }
+                        }
+
+                        &.product-name-quantity {
+                          flex: 1 1 100%;
+                          .product-name {
+                            font-size: 14px;
+                            font-weight: 500;
+                          }
+
+                          .product-quantity {
+                            .quantity {
+                              display: flex;
+                              flex: 1 1 15%;
+                              border: 1px solid var(--dark-green);
+                              justify-content: space-between;
+                              border-radius: 50px;
+                              margin-right: 20px !important;
+                              background-color: var(--white);
+                              max-width: 80px;
+
+                              button,
+                              input {
+                                border-radius: 50px;
+                                border: none;
+                                font-size: 16px;
+                                background-color: var(--white);
+                              }
+                              button {
+                                flex: 1 1 30%;
+                                width: 30px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                transition: 0.25s;
+                                @media (hover: hover) {
+                                  &:hover {
+                                    cursor: pointer;
+                                    background-color: var(--light-green);
+                                  }
+                                }
+                              }
+
+                              input {
+                                max-width: 25px;
+                                flex: 1 1 20%;
+                              }
+
+                              input::-webkit-outer-spin-button,
+                              input::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                              }
+
+                              /* Firefox */
+                              input[type="number"] {
+                                -moz-appearance: textfield;
+                                pointer-events: none;
+                                padding: 0;
+                              }
+                            }
+                          }
+                        }
+
+                        &.product-name-quantity,
+                        &.wrap {
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-between;
+                        }
+                        &.wrap {
+                          .product-total {
+                            bdi {
+                              font-weight: 600;
+                              .woocommerce-Price-currencySymbol {
+                                margin-left: 5px;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+                tfoot {
+                  flex-direction: column;
+                  tr {
+                    display: flex;
+                    th,
+                    td {
+                      flex: 1 1 100%;
+                      border-top: none;
+                    }
+                  }
+                }
               }
             }
           }

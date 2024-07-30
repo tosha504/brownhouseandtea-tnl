@@ -35,9 +35,7 @@
 			<div class="header__top-bar" <?php echo $top_bar_background; ?>>
 				<div class="container">
 					<?php
-					$current_IP = get_current_IP()['countryCode'];
-					$display_top_bar = isset($current_IP) && $current_IP !== 'PL' ? '' : $top_bar_text;
-					echo  $display_top_bar . $top_bar_link; ?>
+					echo  $top_bar_text . $top_bar_link; ?>
 				</div>
 			</div>
 			<div class="header__main">

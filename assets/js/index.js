@@ -59,9 +59,6 @@ jQuery(document).ready(function () {
       }
     });
   }
-
-  // console.log(jQuery("body .flex-control-nav"));
-
   setTimeout(function () {
     if (getCookie('popupCookie') != 'submited') {
       jQuery('.cookies').css("display", "block").hide().fadeIn(2000);

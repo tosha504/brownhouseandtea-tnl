@@ -39,7 +39,7 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 			<?php do_action('woocommerce_checkout_shipping'); ?>
 
 
-			<h3 class="stepCheckout-title"><?php echo __('2. Shipping', 'understrap'); ?></h3>
+			<h3 class="stepCheckout-title"><?php echo __('2. Shipping', 'bht-tnl'); ?></h3>
 			<?php
 			if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : 	?>
 				<div class="ajax-shipp-method">
@@ -50,7 +50,7 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 					<?php do_action('woocommerce_review_order_after_shipping'); ?>
 				</div>
 			<?php endif; ?>
-			<h3 class="stepCheckout-title"><?php echo __('3. Payments', 'understrap'); ?></h3>
+			<h3 class="stepCheckout-title"><?php echo __('3. Payments', 'bht-tnl'); ?></h3>
 			<?php do_action('custom_payment_position'); ?>
 		</div>
 
@@ -59,12 +59,13 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 	<?php endif; ?>
 	<div class="right">
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
+		<div class="free-shippinge"></div>
 
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
 
 		<div>
-			<h3 id="order_review_heading"><?php esc_html_e('Your order', 'woocommerce'); ?></h3>
+			<h3 id="order_review_heading"><?php esc_html_e('4.Your order', 'woocommerce'); ?></h3>
 			<br>
 			<?php do_action('woocommerce_checkout_order_review'); ?>
 			<div class="form-row place-order">
@@ -76,25 +77,21 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 					<br /><button type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e('Update totals', 'woocommerce'); ?>"><?php esc_html_e('Update totals', 'woocommerce'); ?></button>
 				</noscript>
 				<?php
-				if (wc_coupons_enabled()) {
-				?>
+				if (wc_coupons_enabled()) { ?>
 					<div class="checkoutCopon">
-						<a href="#" class="checkoutCopon-toggler"><?php echo __('Add a discount coupon', 'understrap') ?></a>
-						<div class="checkoutCopon-toggleObject" style="display: none;">
+						<div class="checkoutCopon-toggleObject">
 							<p class="resoult-coupon w-100"></p>
 							<div class="checkout_coupon d-flex align-items-center" method="post">
 								<div class="couponField">
 									<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" id="checkout_coupon_code" value="" />
 								</div>
 								<div class="couponBtn">
-									<a href="#apply" id="checkout_apply_coupon" class="btn btn-round text-uppercase"><?php esc_attr_e('Apply', 'understrap'); ?> </a>
+									<a href="#apply" id="checkout_apply_coupon" class="btn btn-round text-uppercase"><?php esc_attr_e('Apply', 'bht-tnl'); ?> </a>
 								</div>
 							</div>
 						</div>
 					</div>
-				<?php
-				}
-				?>
+				<?php } ?>
 				<?php wc_get_template('checkout/terms.php'); ?>
 				<?php do_action('woocommerce_review_order_before_submit'); ?>
 				<?php echo apply_filters('woocommerce_order_button_html', '<button type="submit" class="button alt' . esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : '') . '" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr($order_button_text) . '" data-value="' . esc_attr($order_button_text) . '">' . esc_html($order_button_text) . '</button>'); // @codingStandardsIgnoreLine
