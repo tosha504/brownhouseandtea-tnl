@@ -55,7 +55,8 @@ body {
             }
 
             flex-wrap: wrap;
-            .woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+            .woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout,
+            .woocommerce-NoticeGroup.woocommerce-NoticeGroup-updateOrderReview {
               flex: 1 1 100%;
             }
 
@@ -97,6 +98,11 @@ body {
               display: flex;
               gap: 10px;
               flex-direction: column;
+
+              select {
+                height: 0;
+                border: none;
+              }
             }
 
             .right {
@@ -218,6 +224,9 @@ body {
                               }
                             }
                           }
+                          .product-remove {
+                            margin-left: auto;
+                          }
                         }
                       }
                     }
@@ -232,6 +241,57 @@ body {
                     td {
                       flex: 1 1 100%;
                       border-top: none;
+                    }
+
+                    &:not(:last-child) {
+                      th,
+                      td {
+                        font-weight: 400;
+                        padding: 2.5px 12px;
+                      }
+                    }
+
+                    &:last-child {
+                      margin-top: 10px;
+                      border-top: 1px solid var(--dark-green);
+
+                      td {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .woocommerce-terms-and-conditions-wrapper,
+              .checkoutCopon {
+                margin-bottom: 20px;
+              }
+
+              .checkoutCopon {
+                .checkoutCopon-toggleObject {
+                  .checkout_coupon {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    .couponField {
+                      flex: 1 1 60%;
+                    }
+
+                    .couponBtn {
+                      flex: 1 1 40%;
+
+                      #checkout_apply_coupon {
+                        text-transform: uppercase;
+                        border: 1px solid var(--dark-green);
+                        border-radius: 50px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 12px;
+                      }
                     }
                   }
                 }

@@ -20,7 +20,6 @@ defined('ABSPATH') || exit;
 
 ?>
 <table class="shop_table woocommerce-checkout-review-order-table">
-
 	<tbody>
 		<?php
 		do_action('woocommerce_review_order_before_cart_contents');
@@ -86,7 +85,8 @@ defined('ABSPATH') || exit;
 									esc_url(wc_get_cart_remove_url($cart_item_key)),
 									esc_html__('Remove this item', 'woocommerce'),
 									esc_attr($_product->get_id()),
-									esc_attr($_product->get_sku())
+									esc_attr($cart_item_key),
+									esc_attr($_product->get_sku()),
 								),
 								$cart_item_key
 							);
@@ -103,7 +103,6 @@ defined('ABSPATH') || exit;
 		<?php
 			}
 		}
-
 		do_action('woocommerce_review_order_after_cart_contents');
 		?>
 	</tbody>
@@ -114,7 +113,7 @@ defined('ABSPATH') || exit;
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 
-		<?php foreach (WC()->cart->get_coupons() as $code => $coupon) : var_dump($coupon) ?>
+		<?php foreach (WC()->cart->get_coupons() as $code => $coupon) :  ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
 				<th><?php wc_cart_totals_coupon_label($coupon); ?></th>
 				<td><?php wc_cart_totals_coupon_html($coupon); ?></td>
@@ -147,7 +146,10 @@ defined('ABSPATH') || exit;
 		<?php endif; ?>
 
 		<?php do_action('woocommerce_review_order_before_order_total'); ?>
-
+		<tr>
+			<th><?php esc_html_e('Shipping', 'woocommerce'); ?></th>
+			<td><?php echo  WC()->cart->get_cart_shipping_total(); ?></td>
+		</tr>
 		<tr class="order-total">
 			<th><?php esc_html_e('Total', 'woocommerce'); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>

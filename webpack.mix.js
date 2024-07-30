@@ -46,6 +46,6 @@ mix
   .js("src/index.js", "assets/js/index.js")
   .browserSync({
     proxy: "http://brownhouseandtea.local/",
-    files: [`**/*.php`, `**/*.js`, `**/*.css`],
+    files: [`**/*.css`, `**/*.php`, `**/*.js`],
   });
 

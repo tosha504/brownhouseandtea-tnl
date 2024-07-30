@@ -4,8 +4,8 @@ jQuery(function (jQuery) {
       action: 'update_order_review',
       key: jQuery(e.target).attr('name'),
       qty: jQuery(e.target).attr('value'),
-      // security: wc_checkout_params.update_order_review_nonce,
-      // post_data: jQuery('form.checkout').serialize()
+      security: wc_checkout_params.update_order_review_nonce,
+      post_data: jQuery('form.checkout').serialize()
     };
     jQuery.post(add_quantity.ajax_url, data, function (response) {
       // console.log(response);

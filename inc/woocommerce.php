@@ -315,10 +315,14 @@ function cart_update_qty_script()
   endif;
 }
 add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
-add_action('woocommerce_checkout_order_review', 'test', 1);
+
+
+// add_action('woocommerce_checkout_order_review', 'test', 1);
 function test()
 { ?>
-  <div class="free-shippinge"></div>
+  <!-- <div class="free-shippinge"></div> -->
+  <!-- <div class="free-shippinge1"></div> -->
+
   <?php
   // $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
 
@@ -329,6 +333,7 @@ function test()
 function woocommerce_header_add_to_cart_fragment($fragments)
 {
   global $woocommerce;
+
   ob_start(); ?>
   <a href="<?php echo wc_get_cart_url(); ?>">
     <span class="count">
@@ -350,7 +355,24 @@ function woocommerce_header_add_to_cart_fragment($fragments)
   return $fragments;
 }
 
+// add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment2', 1);
 
+function woocommerce_header_add_to_cart_fragment2($fragments)
+{
+  ob_start();  ?>
+  <div>
+    <?php
+    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
+    // var_dump(get_free_shipping_amount_for_zone() - WC()->cart->get_cart_subtotal());
+    $min_amount = wc_price($min_amount);
+    echo "Brakuje Ci jeszcze " . $min_amount . " aby cieszyć się <b>darmową wysyłką!</b>";
+    ?>
+  </div>
+<?php
+  $fragments['div.free-shippinge1'] = ob_get_clean();
+
+  return $fragments;
+}
 
 add_filter('woocommerce_available_variation', function ($data, $product, $variation) {
   if (!$variation->is_in_stock()) {

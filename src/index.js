@@ -102,7 +102,7 @@ jQuery(document).ready(function () {
     alert('You are now on the waitlist for this product!');
 
     // Example: Trigger a custom event
-    // $(document).trigger('waitlistEvent', ['Waitlist activated']);
+    // jQuery(document).trigger('waitlistEvent', ['Waitlist activated']);
   }
   jQuery(window).on('click', function (e) {
     if (body.hasClass('single-product')) {
@@ -112,6 +112,17 @@ jQuery(document).ready(function () {
       }
     }
   })
+
+
+  jQuery(".product-featured-bht__slider").slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: true,
+    arrows: false,
+    infinite: false,
+    swipe: true,
+
+  });
 
   jQuery(window).on("load", function () {
 
@@ -139,6 +150,28 @@ jQuery(document).ready(function () {
     }
 
   })
+
+
+  jQuery('#checkout_apply_coupon').click(function (ev) {
+    ev.preventDefault();
+    var code = jQuery('#checkout_coupon_code').val();
+    var data = {
+      action: 'ajaxapplucoupon',
+      coupon_code: code
+    };
+
+    jQuery.post(wc_checkout_params.ajax_url, data, function (returned_data) {
+      if (returned_data.result == 'error') {
+        alert('error');
+        jQuery('p.resoult-coupon').html(returned_data.message);
+      } else {
+        setTimeout(function () {
+          jQuery(document.body).trigger('update_checkout');
+        }, 500);
+        console.log(returned_data + code);
+      }
+    })
+  });
 
   //shop-page
   jQuery('.filter-call').on('click', function (e) {
@@ -269,6 +302,7 @@ jQuery(document).ready(function () {
 
     input.trigger("change");
   });
+
 
   jQuery('.cart-link').click(function (e) {
     e.preventDefault();

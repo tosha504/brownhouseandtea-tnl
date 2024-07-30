@@ -308,7 +308,6 @@ add_filter('woocommerce_update_order_review_fragments', 'filter_update_order_rev
 function filter_update_order_review_fragments($fradments)
 {
 	ob_start();
-
 	if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) :
 ?>
 		<div class="ajax-shipp-method">
@@ -339,7 +338,6 @@ function hide_shipping_when_free_is_available($rates, $package)
 			$free_shipping = new WC_Shipping_Free_Shipping($rate->instance_id);
 			$min_amount = $free_shipping->min_amount;
 			// Check if cart total meets or exceeds the minimum amount for free shipping
-			var_dump(intval(WC()->cart->cart_contents_total), intval($min_amount));
 			if (intval(WC()->cart->cart_contents_total) >= intval($min_amount)) {
 				$free_shipping_available = true;
 				break;

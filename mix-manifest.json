@@ -8,5 +8,6 @@
     "/src/index.css": "/src/index.css",
     "/css-blocks/tea-best-bht.css": "/css-blocks/tea-best-bht.css",
     "/css-blocks/refill-bht.css": "/css-blocks/refill-bht.css",
-    "/css-blocks/quiz-bht.css": "/css-blocks/quiz-bht.css"
+    "/css-blocks/quiz-bht.css": "/css-blocks/quiz-bht.css",
+    "/css-blocks/product-featured-bht.css": "/css-blocks/product-featured-bht.css"
 }

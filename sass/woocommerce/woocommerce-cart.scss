@@ -1,0 +1,27 @@
+body {
+  &.woocommerce-cart {
+    main {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 15px;
+
+      @media (min-width: map-get($grid-breakpoints, md)) {
+        max-width: 90vw;
+        padding: 0;
+      }
+
+      @media (min-width: map-get($grid-breakpoints, lg)) {
+      }
+
+      @media (min-width: map-get($grid-breakpoints, xl)) {
+        max-width: 1257px;
+        padding: 0 15px;
+      }
+
+      @media (min-width: map-get($grid-breakpoints, xxl)) {
+        padding: 0;
+      }
+    }
+  }
+}
