@@ -8,6 +8,50 @@ body {
           margin: 0;
         }
 
+        .checkout-banner {
+          background-color: var(--light-green);
+          margin-bottom: 30px;
+          display: flex;
+          align-items: center;
+          border-radius: 20px;
+          padding: 30px;
+          gap: 30px;
+          @media (max-width: map-get($grid-breakpoints, md)) {
+            flex-wrap: wrap;
+            padding: 30px 10px;
+          }
+
+          h1 {
+            font-size: clamp(25px, 3vw, 30px);
+            display: flex;
+            align-content: inherit;
+            gap: 20px;
+            @media (min-width: map-get($grid-breakpoints, md)) {
+              &::before {
+                content: "";
+                display: block;
+                width: 30px;
+                height: 30px;
+                background: url(../assets/icons/leaf.svg) no-repeat center/cover;
+              }
+            }
+          }
+
+          &__btn {
+            @media (min-width: map-get($grid-breakpoints, md)) {
+              margin-left: auto;
+            }
+            a {
+              padding: 0.25em 1em;
+              border: 2px solid var(--dark-green);
+              border-radius: 50px;
+              font-size: clamp(14px, 3vw, 17px);
+              text-transform: uppercase;
+              font-weight: 500;
+            }
+          }
+        }
+
         margin: 50px auto;
         .woocommerce-form-login-toggle {
           .woocommerce-info {
@@ -109,6 +153,8 @@ body {
               padding: 20px;
               @media (min-width: map-get($grid-breakpoints, md)) {
                 padding: 40px;
+                position: sticky;
+                top: 170px;
               }
               background-color: var(--white);
               border-radius: 30px;

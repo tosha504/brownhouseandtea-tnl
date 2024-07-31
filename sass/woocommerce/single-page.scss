@@ -315,6 +315,7 @@ body {
       .price {
         display: flex;
         gap: 20px;
+        align-items: center;
       }
 
       .variations_form.cart {
@@ -332,7 +333,8 @@ body {
         margin-bottom: 20px;
       }
 
-      .backorder-button {
+      .backorder-button,
+      .cwg_popup_submit {
         display: inline-flex;
         width: 100%;
         justify-content: center;
@@ -355,12 +357,13 @@ body {
         display: flex;
         .quantity {
           display: flex;
-          flex: 1 1 15%;
+          flex: 1 1 20%;
           border: 1px solid var(--dark-green);
           justify-content: space-between;
           border-radius: 50px;
           margin-right: 20px !important;
           background-color: var(--white);
+          overflow: hidden;
 
           button,
           input {
@@ -411,7 +414,8 @@ body {
           text-transform: uppercase;
           color: var(--black);
           opacity: 1;
-          font-weight: 400;
+          font-weight: 500;
+          padding: 1em;
 
           &.wc-variation-is-unavailable {
             @media (hover: hover) {
@@ -459,6 +463,17 @@ body {
       .reset_variations {
         display: none !important;
       }
+    }
+  }
+
+  .product-featured-bht {
+    padding: 25px 0 50px;
+    @media (min-width: map-get($grid-breakpoints, md)) {
+      padding: 40px 0 70px;
+    }
+
+    .price {
+      margin: 0 auto;
     }
   }
 }

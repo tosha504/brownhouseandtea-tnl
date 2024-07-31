@@ -19,11 +19,16 @@ if (!empty($block['anchor'])) {
   $anchor = 'id="' . esc_attr($block['anchor']) . '" ';
 }
 
-?>
+$title = get_field('title'); ?>
 
 <section class="product-featured-bht ">
   <div class="container">
-    <?php $args = array(
+
+    <div class="product-featured-bht__title">
+      <?php echo $title; ?>
+    </div>
+    <?php
+    $args = array(
       'post_type' => 'product',
       'posts_per_page' => 8,
       'tax_query' => array(

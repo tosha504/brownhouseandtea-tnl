@@ -53,7 +53,7 @@ jQuery(document).ready(function () {
         });
       } else {
         jQuery(".header").css({
-          "background": "transparent",
+          "background": "#ffffff50",
           "box-shadow": "none"
         });
       }
@@ -93,14 +93,6 @@ jQuery(document).ready(function () {
     jQuery('.age-verefication').css('display', 'block');
   }
   jQuery('div.woocommerce').on('change', 'input.qty', function () {});
-  if (window.location.search.indexOf('outofstock') !== -1) {
-    // Replace this alert with your custom alert or event
-    alert('You are now on the waitlist for this product!');
-
-    // Example: Trigger a custom event
-    // jQuery(document).trigger('waitlistEvent', ['Waitlist activated']);
-  }
-
   jQuery(window).on('click', function (e) {
     if (body.hasClass('single-product')) {
       console.log(body.hasClass('single-product'));
@@ -115,7 +107,18 @@ jQuery(document).ready(function () {
     dots: true,
     arrows: false,
     infinite: false,
-    swipe: true
+    swipe: true,
+    responsive: [{
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 2
+      }
+    }, {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 1
+      }
+    }]
   });
   jQuery(window).on("load", function () {
     jQuery(".flex-control-nav.flex-control-thumbs").slick({
@@ -198,7 +201,8 @@ jQuery(document).ready(function () {
       jQuery('.quantity').hide();
 
       // Optionally, add a custom button
-      jQuery('<button type="button" class="backorder-button">Powiadom o dostępności</button>').insertAfter('.single_variation_wrap');
+      // jQuery('<button type="button" class="backorder-button">Powiadom o dostępności</button>')
+      //   .insertAfter('.single_variation_wrap');
     } else {
       // Ensure that add to cart button and quantity input are visible if in stock
       jQuery('.single_add_to_cart_button').show();

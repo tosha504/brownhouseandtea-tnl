@@ -56,5 +56,5 @@ if ($product->is_in_stock()) : ?>
 
 <?php
 else : ?>
-	<button type="button" class="backorder-button">Powiadom o dostępności</button>
+	<!-- <button type="button" class="backorder-button">Powiadom o dostępności</button> -->
 <?php endif; ?>

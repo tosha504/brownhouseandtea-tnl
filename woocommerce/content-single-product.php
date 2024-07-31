@@ -113,32 +113,33 @@ $brewing_items = get_field('brewing_items', get_the_ID());
 	</div>
 
 	<!--brewing start-->
-	<div class="brewing">
-		<div class="container">
-			<?php
-			echo $brewing_title;
-			if (!empty($brewing_items) && count($brewing_items) > 0) {
-			?>
-				<div class="brewing__items">
-					<?php foreach ($brewing_items as $key => $item) { ?>
-						<div class="brewing__items_item">
-							<div class="brewing__items_item-img">
-								<?php my_custom_image($item['icon']); ?>
+	<?php if (!empty($brewing_title) && !empty($brewing_items)) { ?>
+		<div class="brewing">
+			<div class="container">
+				<?php
+				echo $brewing_title;
+				if (!empty($brewing_items) && count($brewing_items) > 0) {
+				?>
+					<div class="brewing__items">
+						<?php foreach ($brewing_items as $key => $item) { ?>
+							<div class="brewing__items_item">
+								<div class="brewing__items_item-img">
+									<?php my_custom_image($item['icon']); ?>
+								</div>
+								<p class="brewing__items_item-title">
+									<?php echo $item['brewing_items_title'] ?>
+								</p>
+								<p class="brewing__items_item-description">
+									<?php echo $item['brewing_items_description'] ?>
+								</p>
 							</div>
-							<p class="brewing__items_item-title">
-								<?php echo $item['brewing_items_title'] ?>
-							</p>
-							<p class="brewing__items_item-description">
-								<?php echo $item['brewing_items_description'] ?>
-							</p>
-						</div>
-					<?php } ?>
-				</div>
-			<?php }
-			?>
-		</div>
-	</div><!--brewing end-->
-
+						<?php } ?>
+					</div>
+				<?php }
+				?>
+			</div>
+		</div><!--brewing end-->
+	<?php } ?>
 	<section class="blog-bht">
 		<div class="container">
 			<ul class="blog-bht__items">

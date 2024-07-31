@@ -21,12 +21,27 @@ function create_product_custom_taxonomy()
 add_action('init', 'create_product_custom_taxonomy');
 // dynamic_sidebar('left-sidebar');
 add_action('woocommerce_before_checkout_form', function () {
+  $title_for_chekout_page = !empty(get_field('title_for_chekout_page', 'options')) ? "<h1>" . get_field('title_for_chekout_page', 'options') . "</h1>" : "";
+  $link_chekout = get_field('link', 'options');
+  $dsplay_link_chekout = '';
+  if ($link_chekout) {
+    $link_url = $link_chekout['url'];
+    $link_title = $link_chekout['title'];
+    $link_target = $link_chekout['target'] ? $link_chekout['target'] : '_self';
+
+    $dsplay_link_chekout .= '<div class="checkout-banner__btn" ><a href="' . esc_url($link_url) . '" target="' . esc_attr($link_target) . '">' .  esc_html($link_title) . '</a></div>';
+  }
+
   echo '<div class="container">';
+  echo '<div class="checkout-banner">' . $title_for_chekout_page . $dsplay_link_chekout . '</div>';
 }, 1);
 
 add_action('woocommerce_after_checkout_form', function () {
   echo '</div>';
 }, 1);
+
+
+
 // add_action('woocommerce_checkout_before_order_review', 'woocommerce_checkout_payment', 20);
 
 remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
@@ -79,7 +94,59 @@ remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+add_action('woocommerce_after_single_product', function () {
+?>
+  <section class="product-featured-bht ">
+    <div class="container">
 
+      <div class="product-featured-bht__title">
+        <h4 style="font-size: clamp(40px, 3vw, 60px);text-align: center;">Podobne produkty</h4>
+      </div>
+      <?php
+      $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => 8,
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'product_visibility',
+            'field'    => 'name',
+            'terms'    => 'featured',
+            'operator' => 'IN',
+          ),
+        ),
+      );
+      $loop = new WP_Query($args);
+      if ($loop->have_posts()) { ?>
+        <ul class="product-featured-bht__slider">
+          <?php while ($loop->have_posts()) : $loop->the_post();
+          ?>
+            <li class="product">
+              <a href="<?php echo get_permalink(); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                <div class="thumbnail-wrap">
+                  <?php echo get_the_post_thumbnail()  ?>
+                </div>
+                <?php bbloomer_show_sale_percentage_loop() ?>
+                <h5 class="woocommerce-loop-product__title"><?php echo  get_the_title(); ?></h5>
+                <span class="price">
+                  <?php $_product = wc_get_product(get_the_ID());
+                  echo $_product->get_price_html(); ?>
+                </span>
+              </a>
+            </li>
+          <?php
+          endwhile;
+          ?>
+
+        </ul>
+      <?php } else {
+        echo __('No products found', 'bht-tnl');
+      }
+      wp_reset_postdata();
+      ?>
+    </div>
+
+  </section>
+<?php });
 
 remove_action('woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10);
 // Add actions bht
@@ -193,7 +260,7 @@ function bbloomer_show_sale_percentage_loop()
       }
     }
   }
-  if ($max_percentage > 0) echo "<span class='custom-onsale'>-" . round($max_percentage) . "%</span>";
+  if ($max_percentage > 0 && $product->get_availability()['class'] == 'in-stock') echo "<span class='custom-onsale'>-" . round($max_percentage) . "%</span>";
 }
 
 add_filter('woocommerce_sale_flash', '__return_null');

@@ -47,7 +47,6 @@ if ($product->get_type() != 'variable') {
     echo '<span class="stock-label-loop" style="display: block;">' . __('wracam już 1 kwietnia', 'bht-tnl') . '</span>'; ?>
     <div class="add-to-cart-wrap-single">
       <a href="<?php echo get_permalink($product->get_id()); ?>?outofstock" class="backorder-button loop-not-stock single">Powiadom o dostępności</a>
-
       <?php
     }
     echo '<a href="' . get_permalink($product->get_id()) . '" class="button">' . __('Dowiedz się więcej', 'bht-tnl') . '</a></div>';
