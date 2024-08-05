@@ -42,10 +42,10 @@ body {
               margin-left: auto;
             }
             a {
-              padding: 0.25em 1em;
-              border: 2px solid var(--dark-green);
+              padding: 10px 25px;
+              border: 1px solid var(--dark-green);
               border-radius: 50px;
-              font-size: clamp(14px, 3vw, 17px);
+              font-size: clamp(14px, 3vw, 15px);
               text-transform: uppercase;
               font-weight: 500;
             }
@@ -164,7 +164,9 @@ body {
                 background-color: var(--light-green);
                 width: 100%;
                 text-align: center;
+                font-size: 14px;
                 border-radius: 50px;
+                padding: 1em;
                 font-family: var(--filson);
                 font-weight: 500;
                 color: var(--dark-green);
@@ -181,6 +183,7 @@ body {
                 tbody {
                   flex-direction: column;
                   gap: 10px;
+                  margin-bottom: 20px;
                   tr {
                     &.cart_item {
                       display: flex;
@@ -336,7 +339,9 @@ body {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        padding: 12px;
+                        padding: 0.75em;
+                        font-size: 15px;
+                        font-weight: 500;
                       }
                     }
                   }

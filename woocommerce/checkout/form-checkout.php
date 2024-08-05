@@ -63,9 +63,6 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 		<div>
 			<h3 id="order_review_heading"><?php esc_html_e('4.Your order', 'woocommerce'); ?></h3>
 			<br>
-			<div class="free-shippinge1">
-				<?php echo "Brakuje Ci jeszcze X aby cieszyć się <b>darmową wysyłką!</b>"; ?>
-			</div>
 
 			<?php do_action('woocommerce_checkout_order_review'); ?>
 			<div class="form-row place-order">

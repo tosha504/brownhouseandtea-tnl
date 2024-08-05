@@ -81,6 +81,20 @@
             }
           }
         }
+
+        .xoo-wsc-empty-cart {
+          .xoo-wsc-btn {
+            border-radius: 50px;
+            transition: 0.35s;
+            background-color: var(--dark-green);
+            border: none;
+            @media (hover: hover) {
+              &:hover {
+                color: var(--white);
+              }
+            }
+          }
+        }
       }
 
       .xoo-wsc-footer {
@@ -104,7 +118,6 @@
             border-radius: 50px;
             text-transform: uppercase;
             font-size: 15px;
-            letter-spacing: 3px;
             transition: 0.35s;
             font-weight: 500;
 
