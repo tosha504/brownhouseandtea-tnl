@@ -102,15 +102,18 @@ $brewing_items = get_field('brewing_items', get_the_ID());
 	do_action('woocommerce_after_single_product_summary');
 	?>
 	<div class="template">
+
 		<div class="container">
-			<div class="template__left">
-				<?php single_product_acf_templates_left(); ?>
-			</div>
-			<div class="template__right">
-				<?php single_product_acf_templates_right(); ?>
-			</div>
+
+			<?php single_product_acf_templates_left();  ?>
 		</div>
 	</div>
+	<!-- <div class="template__left template"> -->
+	<!-- </div>
+			<div class="template__right"> -->
+	<?php  //single_product_acf_templates_right();
+	?>
+	<!-- </div> -->
 
 	<!--brewing start-->
 	<?php if (!empty($brewing_title) && !empty($brewing_items)) { ?>

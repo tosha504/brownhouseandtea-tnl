@@ -411,8 +411,7 @@ function woocommerce_header_add_to_cart_fragment($fragments)
   ob_start();  ?>
   <div>
     <?php
-    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
-    // var_dump(get_free_shipping_amount_for_zone() - WC()->cart->get_cart_subtotal());
+    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : intval(get_free_shipping_amount_for_zone()) - intval(WC()->cart->get_displayed_subtotal());
     $min_amount = wc_price($min_amount);
     echo "Brakuje Ci jeszcze " . $min_amount . " aby cieszyć się <b>darmową wysyłką!</b>"; ?>
   </div>

@@ -16,7 +16,7 @@
         flex: 0 1 calc((100% / 2) - 30px);
       }
       @media (min-width: map-get($grid-breakpoints, xl)) {
-        flex: 1 1 calc((100% / 3) - 30px);
+        flex: 0 1 calc((100% / 3) - 30px);
       }
       border-radius: 20px;
       overflow: hidden;
@@ -89,6 +89,7 @@
         }
 
         .descr {
+          flex: 1 1 100%;
           color: rgba(#1f3f2f, 0.53);
         }
 

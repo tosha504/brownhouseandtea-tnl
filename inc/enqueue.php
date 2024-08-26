@@ -151,3 +151,54 @@ function implement_ajax_apply_coupon()
 }
 add_action('wp_ajax_ajaxapplucoupon', 'implement_ajax_apply_coupon');
 add_action('wp_ajax_nopriv_ajaxapplucoupon', 'implement_ajax_apply_coupon');
+
+
+add_action('wp_ajax_load_more', 'load_more_ajax_handler');
+add_action('wp_ajax_nopriv_load_more', 'load_more_ajax_handler');
+
+function load_more_ajax_handler()
+{
+	check_ajax_referer('ajax_nonce', 'nonce'); // Check nonce for security
+
+	$posts_per_page = get_option('posts_per_page'); // Set how many posts per page you want
+	$paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+	$args = array(
+		'post_type' => 'post',
+		'post_status' => 'publish',
+		'posts_per_page' => $posts_per_page,
+		'paged' => $paged
+	);
+
+	$query = new WP_Query($args);
+	$max_pages = $query->max_num_pages; // Get the maximum number of pages
+
+	if ($query->have_posts()) :
+		ob_start(); // Start output buffering to capture the template part
+
+		while ($query->have_posts()): $query->the_post();
+			$trim_words = 20;
+			$excerpt = wp_trim_words(get_the_excerpt(), $trim_words);
+?>
+			<li class="blog-bht__items_item item">
+				<a href="<?php echo get_permalink(); ?>">
+					<?php echo get_the_post_thumbnail(); ?>
+					<div class="item__wrap">
+						<h5><?php echo  get_the_title(); ?></h5>
+						<p class="descr"><?php echo $excerpt; ?></p>
+						<span>czytaj więcej</span>
+					</div>
+				</a>
+			</li>
+<?php endwhile;
+
+		$posts_html = ob_get_clean(); // Get the post HTML and clear the buffer
+
+		// Return both posts HTML and the max pages info
+		wp_send_json_success(array('posts' => $posts_html, 'max_pages' => $max_pages, 'current_page' => $paged));
+
+	else:
+		wp_send_json_error(array('message' => 'No more posts to load.'));
+	endif;
+
+	die; // Stop execution further to return a proper response
+}

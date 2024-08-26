@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-
 	<?php if (have_posts()) : ?>
 
 		<header class="page-header">
@@ -36,7 +35,7 @@ get_header();
 
 		endwhile;
 
-		the_posts_navigation();
+	// the_posts_navigation();
 
 	else :
 
