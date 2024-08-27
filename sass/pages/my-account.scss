@@ -1,0 +1,29 @@
+body {
+  &.woocommerce-account {
+    main {
+      padding: 50px 0;
+      .container {
+        padding: 50px;
+        background-color: var(--light-green-opacity);
+        border-radius: 30px;
+        form {
+          border: none;
+          button {
+            background-color: var(--black);
+            color: var(--white);
+            font-weight: 400;
+            transition: 0.25s;
+            border-radius: 50px;
+            @media (hover: hover) {
+              &:hover {
+                cursor: pointer;
+                color: var(--white);
+                background-color: var(--dark-green-hover);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

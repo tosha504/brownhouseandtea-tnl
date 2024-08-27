@@ -162,12 +162,25 @@ function load_more_ajax_handler()
 
 	$posts_per_page = get_option('posts_per_page'); // Set how many posts per page you want
 	$paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+
+
 	$args = array(
 		'post_type' => 'post',
 		'post_status' => 'publish',
 		'posts_per_page' => $posts_per_page,
-		'paged' => $paged
+		'paged' => $paged,
+
 	);
+	if (isset($_POST['cat'])) {
+		$args['tax_query'] =  array(
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'slug',
+				'terms'    => $_POST['cat']
+			)
+		);
+	};
+
 
 	$query = new WP_Query($args);
 	$max_pages = $query->max_num_pages; // Get the maximum number of pages
@@ -177,8 +190,7 @@ function load_more_ajax_handler()
 
 		while ($query->have_posts()): $query->the_post();
 			$trim_words = 20;
-			$excerpt = wp_trim_words(get_the_excerpt(), $trim_words);
-?>
+			$excerpt = wp_trim_words(get_the_excerpt(), $trim_words); ?>
 			<li class="blog-bht__items_item item">
 				<a href="<?php echo get_permalink(); ?>">
 					<?php echo get_the_post_thumbnail(); ?>

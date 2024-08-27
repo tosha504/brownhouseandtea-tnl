@@ -155,10 +155,13 @@ body {
           display: flex;
           flex-direction: column;
 
+          > li {
+            border-bottom: 1px solid var(--black);
+          }
+
           li {
             padding: 5px;
             text-align: start;
-            border-bottom: 1px solid var(--black);
 
             .question {
               display: flex;

@@ -85,7 +85,8 @@
         flex-wrap: wrap;
         gap: 15px;
         h5 {
-          font-size: 28px;
+          font-size: 20px;
+          line-height: 1.2;
         }
 
         .descr {
@@ -95,6 +96,8 @@
 
         span {
           text-transform: uppercase;
+          font-weight: 500;
+          font-size: 12px;
         }
       }
     }

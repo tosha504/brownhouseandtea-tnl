@@ -317,7 +317,7 @@ function filter_update_order_review_fragments($fradments)
 
 			<?php do_action('woocommerce_review_order_after_shipping'); ?>
 		</div>
-<?php
+		<?php
 	endif;
 
 	$fradments['.ajax-shipp-method'] = ob_get_clean();
@@ -366,3 +366,75 @@ function hide_shipping_when_free_is_available($rates, $package)
 }
 
 add_filter('woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2);
+
+
+// Function to track post views
+function set_post_views($postID)
+{
+	$count_key = 'post_views_count';
+	$count = get_post_meta($postID, $count_key, true);
+
+	if ($count == '') {
+		$count = 0;
+		delete_post_meta($postID, $count_key);
+		add_post_meta($postID, $count_key, '0');
+	} else {
+		$count++;
+		update_post_meta($postID, $count_key, $count);
+	}
+}
+
+// To prevent post views from being counted every time a post is retrieved
+function count_post_views($post_id)
+{
+	if (!is_single()) return;
+	if (empty($post_id)) {
+		global $post;
+		$post_id = $post->ID;
+	}
+	set_post_views($post_id);
+}
+add_action('wp_head', 'count_post_views');
+
+// Prevent the post views from being cached
+function track_post_views($query)
+{
+	if (!is_single()) return;
+
+	global $post;
+	$postID = $post->ID;
+	set_post_views($postID);
+}
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+// Function to get the most popular posts
+function get_most_popular_posts($num_posts = 3)
+{
+	$args = array(
+		'posts_per_page' => $num_posts,
+		'meta_key' => 'post_views_count',
+		'orderby' => 'meta_value_num',
+		'order' => 'DESC',
+		'post_type' => 'post',
+		'post_status' => 'publish',
+	);
+
+	$popular_posts_query = new WP_Query($args);
+
+	if ($popular_posts_query->have_posts()) {
+		echo '<h1 class="small">Popularne wpisy</h1>';
+		echo '<ul class="popular-posts">';
+		while ($popular_posts_query->have_posts()) {
+			$popular_posts_query->the_post();	?>
+			<li>
+				<a href="<?php echo get_the_permalink(); ?>">
+					<?php echo my_custom_image(get_post_thumbnail_id()); ?>
+					<h5><?php echo get_the_title(); ?></h5>
+				</a>
+			</li>
+<?php	}
+		echo '</ul>';
+	}
+
+	wp_reset_postdata();
+}
