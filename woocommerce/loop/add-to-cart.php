@@ -97,7 +97,7 @@ if ($product->get_type() != 'variable') {
                 ?>
               </ul>
               <a href=" <?php echo get_site_url() . '?add-to-cart=' . $start_item; ?> " data-quantity="1" class="add_to_cart_button button ajax_add_to_cart <?php if ($start_variation->get_sale_price()) echo 'promotion-btn'; ?>" data-product_id="<?php echo $start_item; ?>" aria-label="<?php echo __('Add', 'undersptra') . get_the_title($start_item) . ' ' . __('to cart', 'bht-tnl'); ?>" rel="nofollow">
-                <?php echo !empty($variation->get_price()) ? number_format($variation->get_price(), 2, ',', ' ') : 0;  ?>
+                <?php echo !empty($variation->get_price()) ? '<span class="price-variation">' . number_format($variation->get_price(), 2, ',', ' ') . "</span>" : 0;  ?>
                 <?php echo get_woocommerce_currency_symbol(); ?> - <?php echo  __('Do koszyka', 'woocommerce'); ?>
               </a>
               <a href="<?php echo get_permalink($product->get_id()); ?>" class="backorder-button loop-not-stock">Powiadom o dostępności</a>

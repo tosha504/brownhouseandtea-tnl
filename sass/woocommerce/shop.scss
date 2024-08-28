@@ -300,12 +300,13 @@ body {
 
         a {
           display: block;
-          font-size: 14px;
-
+          font-size: 11px;
+          align-items: center;
           &.add_to_cart_button {
-            flex: 1 1 calc(50% - 5px);
             background-color: var(--dark-green) !important;
             color: var(--white);
+            flex-direction: row;
+            padding: 12px 10px;
           }
 
           &.button {
@@ -343,6 +344,7 @@ body {
         .backorder-button {
           display: none;
           &.loop-not-stock {
+            padding: 12px 0;
             flex: 1 1 calc(40% - 5px);
           }
         }

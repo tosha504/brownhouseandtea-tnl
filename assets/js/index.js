@@ -232,9 +232,7 @@ jQuery(document).ready(function () {
         id = jQuery(this).attr('data-id'),
         price = jQuery(this).attr('data-price'),
         stock = jQuery(this).parent().parent().parent().find('.stock-label-loop');
-
-      // console.log(btn.parent().parent().parent().children('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link').children('div.thumbnail-wrap').children('img').attr('src'));
-      // console.log(jQuery(this).attr('image-url-data'));
+      console.log(price);
       btn.closest('.product.type-product').find('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link div.thumbnail-wrap img').attr('srcset', jQuery(this).attr('image-url-data'));
       // console.log(btn.closest().find('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link div.thumbnail-wrap img'));
       if (jQuery(this).attr('stock-data') == 'in-stock') {

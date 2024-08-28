@@ -94,8 +94,7 @@ remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
-add_action('woocommerce_after_single_product', function () {
-?>
+add_action('woocommerce_after_single_product', function () { ?>
   <section class="product-featured-bht ">
     <div class="container">
 
@@ -118,12 +117,11 @@ add_action('woocommerce_after_single_product', function () {
       $loop = new WP_Query($args);
       if ($loop->have_posts()) { ?>
         <ul class="product-featured-bht__slider">
-          <?php while ($loop->have_posts()) : $loop->the_post();
-          ?>
+          <?php while ($loop->have_posts()) : $loop->the_post(); ?>
             <li class="product">
               <a href="<?php echo get_permalink(); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                 <div class="thumbnail-wrap">
-                  <?php echo get_the_post_thumbnail()  ?>
+                  <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="  <?php echo get_post(get_post_thumbnail_id())->post_title; ?>" loading="lazy">
                 </div>
                 <?php bbloomer_show_sale_percentage_loop() ?>
                 <h5 class="woocommerce-loop-product__title"><?php echo  get_the_title(); ?></h5>
@@ -411,7 +409,7 @@ function woocommerce_header_add_to_cart_fragment($fragments)
   ob_start();  ?>
   <div>
     <?php
-    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : intval(get_free_shipping_amount_for_zone()) - intval(WC()->cart->get_displayed_subtotal());
+    $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->get_displayed_subtotal() <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->get_displayed_subtotal();
     $min_amount = wc_price($min_amount);
     echo "Brakuje Ci jeszcze " . $min_amount . " aby cieszyć się <b>darmową wysyłką!</b>"; ?>
   </div>

@@ -36,7 +36,7 @@ $backgroundcolor = get_field('backgroundcolor', get_the_ID()) ?? '';
 $tabs = get_field('tabs', get_the_ID());
 $brewing_title = !empty(get_field('brewing_title', get_the_ID())) ? get_field('brewing_title', get_the_ID()) : '';
 $brewing_items = get_field('brewing_items', get_the_ID());
-?>
+$posts_by_acf  = get_field('posts', get_the_ID()); ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 	<div class="wrap-roduct-bg" <?php echo 'style="background:' . $backgroundcolor . '"'; ?>>
 		<div class="container">
@@ -102,27 +102,17 @@ $brewing_items = get_field('brewing_items', get_the_ID());
 	do_action('woocommerce_after_single_product_summary');
 	?>
 	<div class="template">
-
 		<div class="container">
-
 			<?php single_product_acf_templates_left();  ?>
 		</div>
 	</div>
-	<!-- <div class="template__left template"> -->
-	<!-- </div>
-			<div class="template__right"> -->
-	<?php  //single_product_acf_templates_right();
-	?>
-	<!-- </div> -->
 
 	<!--brewing start-->
 	<?php if (!empty($brewing_title) && !empty($brewing_items)) { ?>
 		<div class="brewing">
 			<div class="container">
-				<?php
-				echo $brewing_title;
-				if (!empty($brewing_items) && count($brewing_items) > 0) {
-				?>
+				<?php echo $brewing_title;
+				if (!empty($brewing_items) && count($brewing_items) > 0) { ?>
 					<div class="brewing__items">
 						<?php foreach ($brewing_items as $key => $item) { ?>
 							<div class="brewing__items_item">
@@ -138,53 +128,44 @@ $brewing_items = get_field('brewing_items', get_the_ID());
 							</div>
 						<?php } ?>
 					</div>
-				<?php }
-				?>
+				<?php } ?>
 			</div>
 		</div><!--brewing end-->
+	<?php }
+	if (!empty($posts_by_acf) && count($posts_by_acf) > 0) { ?>
+		<section class="blog-bht">
+			<div class="container">
+				<ul class="blog-bht__items">
+					<li class="blog-bht__items_cta cta">
+						<p class="cta__pre-title">
+							Brown House & Tea BLOG
+						</p>
+						<h5 class="cta__title">
+							Smak, który
+							inspiruje
+						</h5>
+						<div class="cta__btn">
+							<a href="#">Przejdź do bloga </a>
+						</div>
+					</li>
+					<?php foreach ($posts_by_acf as $key => $post_items) {
+						$trim_words = 20;
+						$excerpt = wp_trim_words($post_items->post_content, $trim_words); ?>
+						<li class="blog-bht__items_item item">
+							<a href="<?php echo esc_url(get_permalink($post_items->ID)); ?>">
+								<?php echo my_custom_image(get_post_thumbnail_id($post_items->ID)) ?>
+								<div class="item__wrap">
+									<h5><?php echo $post_items->post_title ?></h5>
+									<p class="descr"><?php echo $excerpt; ?></p>
+									<span>czytaj więcej</span>
+								</div>
+							</a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</section>
 	<?php } ?>
-	<section class="blog-bht">
-		<div class="container">
-			<ul class="blog-bht__items">
-				<li class="blog-bht__items_cta cta">
-					<p class="cta__pre-title">
-						Brown House & Tea BLOG
-					</p>
-					<h5 class="cta__title">
-						Smak, który
-						inspiruje
-					</h5>
-					<div class="cta__btn">
-						<a href="#">Przejdź do bloga </a>
-					</div>
-				</li>
-
-				<li class="blog-bht__items_item item">
-					<a href="#">
-						<img src="http://brownhouseandtea.local/wp-content/uploads/2024/05/hero-banner-brownhouseandtea.webp" alt="">
-						<div class="item__wrap">
-							<h5>Herbatka na stres suplement diety1</h5>
-							<p class="descr">Dlaczego Matcha jest świetna dla Twojego zdrowia i energii? Matcha, tradycyjna japońska herbata zielona</p>
-							<span>czytaj więcej</span>
-						</div>
-					</a>
-				</li>
-
-				<li class="blog-bht__items_item item">
-					<a href="#">
-						<img src="http://brownhouseandtea.local/wp-content/uploads/2024/05/hero-banner-brownhouseandtea.webp" alt="">
-						<div class="item__wrap">
-							<h5>Herbatka na stres suplement diety1</h5>
-							<p class="descr">Dlaczego Matcha jest świetna dla Twojego zdrowia i energii? Matcha, tradycyjna japońska herbata zielona</p>
-							<span>czytaj więcej</span>
-						</div>
-					</a>
-				</li>
-
-			</ul>
-		</div>
-	</section>
-
 </div>
 
 

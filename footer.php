@@ -80,48 +80,48 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 
 <?php wp_footer(); ?>
 <script type="text/javascript">
-	jQuery(document).ready(function($) {
+	// jQuery(document).ready(function($) {
 
-		$(document).ready(function() {
-			$('#searchbarInput').keypress(function(event) {
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-				if (keycode == '13') {
-					var searchValue = $(this).val();
-					window.location.href = "<?php echo get_home_url(); ?>?s=" + searchValue;
-				}
-			});
-		});
+	// 	$(document).ready(function() {
+	// 		$('#searchbarInput').keypress(function(event) {
+	// 			var keycode = (event.keyCode ? event.keyCode : event.which);
+	// 			if (keycode == '13') {
+	// 				var searchValue = $(this).val();
+	// 				window.location.href = "<?php echo get_home_url(); ?>?s=" + searchValue;
+	// 			}
+	// 		});
+	// 	});
 
 
-		$('#searchbarInput').keyup(function() {
-			$('.delete').click(function() {
-				$('#searchbarInput').val('');
-				$('.search__results').removeClass('opened');
-				$('.delete').removeClass('on');
-			});
-			var searchText = $(this).val();
-			$('.all-results').attr('href', '<?php echo get_home_url(); ?>?s=' + $(this).val());
-			if (searchText.length >= 3) {
-				$('.delete').addClass('on');
-				$('.search__results').addClass('opened');
-				$.ajax({
-					url: '<?php echo get_home_url(); ?>/wp-admin/admin-ajax.php', // Zwróć uwagę, że potrzebujesz poprawnej ścieżki do tego pliku w twoim systemie
-					method: 'POST',
-					data: {
-						action: 'my_ajax_request',
-						text: searchText
-					},
-					success: function(response) {
-						$(".products-list--searchbar").html(response);
-					}
-				});
-			} else {
-				$('.search__results').removeClass('opened');
-				$('.delete').removeClass('on');
-			}
+	// 	$('#searchbarInput').keyup(function() {
+	// 		$('.delete').click(function() {
+	// 			$('#searchbarInput').val('');
+	// 			$('.search__results').removeClass('opened');
+	// 			$('.delete').removeClass('on');
+	// 		});
+	// 		var searchText = $(this).val();
+	// 		$('.all-results').attr('href', '<?php echo get_home_url(); ?>?s=' + $(this).val());
+	// 		if (searchText.length >= 3) {
+	// 			$('.delete').addClass('on');
+	// 			$('.search__results').addClass('opened');
+	// 			$.ajax({
+	// 				url: '<?php echo get_home_url(); ?>/wp-admin/admin-ajax.php', // Zwróć uwagę, że potrzebujesz poprawnej ścieżki do tego pliku w twoim systemie
+	// 				method: 'POST',
+	// 				data: {
+	// 					action: 'my_ajax_request',
+	// 					text: searchText
+	// 				},
+	// 				success: function(response) {
+	// 					$(".products-list--searchbar").html(response);
+	// 				}
+	// 			});
+	// 		} else {
+	// 			$('.search__results').removeClass('opened');
+	// 			$('.delete').removeClass('on');
+	// 		}
 
-		});
-	});
+	// 	});
+	// });
 </script>
 </body>
 

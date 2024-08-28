@@ -74,8 +74,7 @@
 								'menu_id' => 'header-nav-search',
 								'menu_class' => 'header__nav_search',
 							),
-						);
-						?>
+						); ?>
 
 						<?php
 						$shop_items = get_field('shop_items', 'options');
