@@ -75,53 +75,24 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 	<?php my_custom_image($footer_after_mage) ?>
 </div>
 
+<div class="search-form-tnl">
+	<div class="container">
+		<form role="search" method="get" class="search-form" action="/">
+			<label>
+				<span class="screen-reader-text">Search for:</span>
+				<input type="search" class="search-field" placeholder="Search …" name="s"
+					data-rlvlive="true" data-rlvparentel="#rlvlive" data-rlvconfig="default">
+			</label>
+			<button id="closeSeachForm" aria-label="Close search form"><span></span><span></span></button>
+			<div id="rlvlive"></div>
+		</form>
+	</div>
+</div>
+
 </div><!-- #page -->
 <div class="overlay"></div>
 
 <?php wp_footer(); ?>
-<script type="text/javascript">
-	// jQuery(document).ready(function($) {
-
-	// 	$(document).ready(function() {
-	// 		$('#searchbarInput').keypress(function(event) {
-	// 			var keycode = (event.keyCode ? event.keyCode : event.which);
-	// 			if (keycode == '13') {
-	// 				var searchValue = $(this).val();
-	// 				window.location.href = "<?php echo get_home_url(); ?>?s=" + searchValue;
-	// 			}
-	// 		});
-	// 	});
-
-
-	// 	$('#searchbarInput').keyup(function() {
-	// 		$('.delete').click(function() {
-	// 			$('#searchbarInput').val('');
-	// 			$('.search__results').removeClass('opened');
-	// 			$('.delete').removeClass('on');
-	// 		});
-	// 		var searchText = $(this).val();
-	// 		$('.all-results').attr('href', '<?php echo get_home_url(); ?>?s=' + $(this).val());
-	// 		if (searchText.length >= 3) {
-	// 			$('.delete').addClass('on');
-	// 			$('.search__results').addClass('opened');
-	// 			$.ajax({
-	// 				url: '<?php echo get_home_url(); ?>/wp-admin/admin-ajax.php', // Zwróć uwagę, że potrzebujesz poprawnej ścieżki do tego pliku w twoim systemie
-	// 				method: 'POST',
-	// 				data: {
-	// 					action: 'my_ajax_request',
-	// 					text: searchText
-	// 				},
-	// 				success: function(response) {
-	// 					$(".products-list--searchbar").html(response);
-	// 				}
-	// 			});
-	// 		} else {
-	// 			$('.search__results').removeClass('opened');
-	// 			$('.delete').removeClass('on');
-	// 		}
-
-	// 	});
-	// });
 </script>
 </body>
 

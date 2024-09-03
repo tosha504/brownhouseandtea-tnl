@@ -6,12 +6,19 @@ body {
         padding: 50px;
         background-color: var(--light-green-opacity);
         border-radius: 30px;
+
+        h2 {
+          font-size: clamp(25px, 5vw, 37px);
+        }
+
         form {
           border: none;
           button {
             background-color: var(--black);
             color: var(--white);
             font-weight: 400;
+            font-size: 12px;
+            padding: 10px 20px;
             transition: 0.25s;
             border-radius: 50px;
             @media (hover: hover) {
@@ -21,6 +28,16 @@ body {
                 background-color: var(--dark-green-hover);
               }
             }
+          }
+
+          p,
+          .form-row {
+            font-size: 14px;
+            margin: 15px 0;
+          }
+
+          a {
+            font-weight: 700;
           }
         }
       }

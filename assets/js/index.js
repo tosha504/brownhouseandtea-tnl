@@ -13,11 +13,22 @@ jQuery(document).ready(function () {
     burgerSpan = jQuery(".burger span"),
     nav = jQuery('.header__nav'),
     body = jQuery('body'),
-    sidebar = jQuery('.custom-sidebar-shop');
+    sidebar = jQuery('.custom-sidebar-shop'),
+    searchBar = jQuery('#header-nav-search li a'),
+    seachFormPopup = jQuery('.search-form-tnl'),
+    closeSeachForm = jQuery('#closeSeachForm');
   burger.on("click", function () {
     burgerSpan.toggleClass("active");
     nav.toggleClass("active");
     body.toggleClass("fixed-page");
+  });
+  searchBar.on('click', function (e) {
+    e.preventDefault();
+    seachFormPopup.addClass('active');
+  });
+  closeSeachForm.on('click', function (e) {
+    e.preventDefault();
+    seachFormPopup.removeClass('active');
   });
   jQuery('.variations_form').on('submit', function (e) {
     e.preventDefault();
@@ -191,12 +202,8 @@ jQuery(document).ready(function () {
     });
   }
   jQuery('.variations_form').on('show_variation', function (event, variation) {
-    // Always clear previous custom buttons
     jQuery(".backorder-button").remove();
-
-    // Check stock and purchasable status
     if (!variation.is_in_stock && !variation.is_purchasable) {
-      // Hide add to cart button and quantity input
       jQuery('.single_add_to_cart_button').hide();
       jQuery('.quantity').hide();
 
@@ -234,7 +241,6 @@ jQuery(document).ready(function () {
         stock = jQuery(this).parent().parent().parent().find('.stock-label-loop');
       console.log(price);
       btn.closest('.product.type-product').find('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link div.thumbnail-wrap img').attr('srcset', jQuery(this).attr('image-url-data'));
-      // console.log(btn.closest().find('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link div.thumbnail-wrap img'));
       if (jQuery(this).attr('stock-data') == 'in-stock') {
         jQuery(btn_stock).css('display', 'none');
         jQuery(btn).css('display', 'flex');
