@@ -67,7 +67,8 @@ get_header(); ?>
 				var data = {
 					'action': 'load_more',
 					'nonce': localizedObject.nonce,
-					'page': currentPage
+					'page': currentPage,
+					'cat': jQuery('.posts-categories li a.active').data('slug')
 				};
 				loader.show();
 				button.prop('disabled', true).hide();

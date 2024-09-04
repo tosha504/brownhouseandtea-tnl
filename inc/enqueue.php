@@ -189,7 +189,6 @@ function load_more_ajax_handler()
 		);
 	};
 
-
 	$query = new WP_Query($args);
 	$max_pages = $query->max_num_pages; // Get the maximum number of pages
 
