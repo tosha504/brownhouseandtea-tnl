@@ -47,7 +47,15 @@ if (!function_exists('start_scripts')) {
 }
 add_action('wp_enqueue_scripts', 'start_scripts',);
 
-
+function add_typekit_preconnect($hints, $relation_type)
+{
+	if ('preconnect' === $relation_type) {
+		// Add preconnect for Typekit fonts.
+		$hints[] = 'https://use.typekit.net';
+	}
+	return $hints;
+}
+add_filter('wp_resource_hints', 'add_typekit_preconnect', 10, 2);
 
 function custom_block_theme_acf_enqueue_scripts()
 {

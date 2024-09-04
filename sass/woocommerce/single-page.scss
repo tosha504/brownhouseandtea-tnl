@@ -18,6 +18,9 @@ body {
       .woocommerce-product-gallery {
         display: flex;
         flex-wrap: wrap;
+        img {
+          border-radius: 20px;
+        }
         .flex-viewport {
           flex: 1 1 100%;
           max-width: 100%;
@@ -25,20 +28,17 @@ body {
           .woocommerce-product-gallery__wrapper {
             position: relative;
 
-            // div {
-            // }
             .woocommerce-product-gallery__image {
               height: fit-content;
               display: flex !important;
-
               a {
                 display: flex !important;
                 width: 100%;
                 overflow: hidden;
-                border-radius: 20px;
+                // border-radius: 20px;
                 // display: flex;
                 // flex-wrap: wrap;
-                // overflow: hidden;
+                overflow: hidden !important;
                 // min-height: 500px !important;
                 img {
                   //   border-radius: 20px;
@@ -295,7 +295,7 @@ body {
 
           &-description {
             font-size: 14px;
-            left: 1.6;
+            line-height: 1.6;
           }
         }
       }
@@ -318,9 +318,17 @@ body {
       .price {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         gap: 0px 5px;
         align-items: center;
+      }
+
+      .price-per-serving-wrapper {
+        flex: 1 1 100%;
+      }
+
+      .iworks-omnibus,
+      .price-per-serving-wrapper {
+        font-size: 14px;
       }
 
       .variations_form.cart {

@@ -25,10 +25,12 @@ jQuery(document).ready(function () {
   searchBar.on('click', function (e) {
     e.preventDefault();
     seachFormPopup.addClass('active');
+    body.addClass("fixed-page");
   });
   closeSeachForm.on('click', function (e) {
     e.preventDefault();
     seachFormPopup.removeClass('active');
+    body.removeClass("fixed-page");
   });
   jQuery('.variations_form').on('submit', function (e) {
     e.preventDefault();

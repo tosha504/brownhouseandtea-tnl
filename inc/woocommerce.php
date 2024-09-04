@@ -85,6 +85,8 @@ if (!function_exists('bht_tnl_add_woocommerce_support')) {
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+
+
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
@@ -263,56 +265,6 @@ function bbloomer_show_sale_percentage_loop()
 
 add_filter('woocommerce_sale_flash', '__return_null');
 
-
-//
-// function display_specific_variation_dropdown_on_shop_page()
-// {
-//   global $product;
-
-//   // Check if the product is a variable product
-//   if ($product->is_type('variable')) {
-//     // Get the attributes used for variations
-//     $attributes = $product->get_variation_attributes();
-
-//     // Loop through each attribute and display a select box
-//     foreach ($attributes as $attribute_name => $options) {
-//       // Only display if options are available
-//       if (!empty($options)) {
-//         $cleaned_attribute_name = str_replace('attribute_', '', $attribute_name);
-//         echo '<select name="' . esc_attr($attribute_name) . '">';
-//         foreach ($options as $option) {
-//           // The option value needs to be sanitized to ensure it's safe for output
-//           echo '<option value="' . esc_attr($option) . '">' . esc_html(apply_filters('woocommerce_variation_option_name', $option)) . '</option>';
-//         }
-//         echo '</select>';
-//       }
-//     }
-//   }
-// }
-
-// add_action('woocommerce_after_shop_loop_item', 'custom_variation_buttons_on_shop_page', 30);
-
-// function custom_variation_buttons_on_shop_page()
-// {
-//   global $product;
-
-//   if ($product->is_type('variable')) {
-//     $variations = $product->get_available_variations();
-
-//     foreach ($variations as $variation) {
-//       $variation_obj = new WC_Product_Variation($variation['variation_id']);
-
-//       // Check if variation is in stock
-//       if ($variation_obj->is_in_stock()) {
-//         echo sprintf('<a href="%s" class="button add_to_cart_button">Add to Cart</a>', $variation_obj->add_to_cart_url());
-//       } else {
-//         // Assuming you have a mailto or a link to a contact form
-//         echo '<a href="mailto:example@example.com?subject=Product Inquiry: ' . $product->get_title() . '" class="button">Mail to Me</a>';
-//       }
-//     }
-//   }
-// }
-
 function check_variation_stock_status()
 {
   if (isset($_POST['product_id']) && isset($_POST['variation_id'])) {
@@ -336,21 +288,6 @@ add_action('woocommerce_before_shop_loop_item_title', function () {
 add_action('woocommerce_before_shop_loop_item_title', function () {
   echo '</div>';
 }, 11);
-
-
-
-/**
- * Show cart contents / total Ajax
- */
-
-// add_action('woocommerce_update_cart_action_cart_updated', function ($cart_updated) {
-//   var_dump($cart_updated);
-//   // if ($cart_updated) {
-//   //   WC()->session->set('refresh_cart_totals', true);
-//   //   WC_AJAX::get_refreshed_fragments();
-//   // }
-//   // return $cart_updated;
-// });
 
 add_action('wp_footer', 'cart_update_qty_script');
 function cart_update_qty_script()
@@ -381,20 +318,6 @@ function cart_update_qty_script()
 }
 add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
 
-
-// add_action('woocommerce_checkout_order_review', 'test', 1);
-function test()
-{ ?>
-  <!-- <div class="free-shippinge"></div> -->
-  <!-- <div class="free-shippinge1"></div> -->
-
-  <?php
-  // $min_amount = get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total <= 0 ?   0 : get_free_shipping_amount_for_zone() - WC()->cart->cart_contents_total;
-
-  // echo "Brakuje Ci jeszcze <b>" . $min_amount . "zł</b> aby cieszyć się <b>darmową wysyłką!</b>";
-
-  ?>
-<?php }
 function woocommerce_header_add_to_cart_fragment($fragments)
 {
   global $woocommerce;
@@ -432,7 +355,7 @@ function woocommerce_header_add_to_cart_fragment2($fragments)
     echo "Brakuje Ci jeszcze " . $min_amount . " aby cieszyć się <b>darmową wysyłką!</b>";
     ?>
   </div>
-<?php
+  <?php
   $fragments['div.free-shippinge1'] = ob_get_clean();
 
   return $fragments;
@@ -445,3 +368,96 @@ add_filter('woocommerce_available_variation', function ($data, $product, $variat
   }
   return $data;
 }, 10, 3);;
+
+
+add_action('woocommerce_variation_options_pricing', 'bbloomer_add_custom_field_to_variations', 10, 3);
+
+function bbloomer_add_custom_field_to_variations($loop, $variation_data, $variation)
+{
+  echo '<div class="custom-text-input-wrapper">'; // Open your custom div
+  woocommerce_wp_text_input(array(
+    'id' => 'gtin_variable[' . $loop . ']',
+    'class' => 'short',
+    'label' => __('Cena za porcje', 'woocommerce'),
+    'value' => get_post_meta($variation->ID, 'price_per_serving', true)
+  ));
+  echo '</div>'; // Close your custom div
+}
+
+// -----------------------------------------
+// 2. Save custom field on product variation save
+
+add_action('woocommerce_save_product_variation', 'bbloomer_save_custom_field_variations', 10, 2);
+
+function bbloomer_save_custom_field_variations($variation_id, $i)
+{
+  $custom_field = $_POST['gtin_variable'][$i];
+  //    if ( isset( $custom_field ) ) {
+  //    update_post_meta( $variation_id, 'var_gtin', esc_attr( $custom_field ) );
+  $variation = wc_get_product($variation_id);
+
+  if ($variation) {
+    $variation->update_meta_data('price_per_serving', $custom_field);
+    $variation->save();
+  }
+  //    }
+}
+
+// add_action('woocommerce_single_variation', 'bbloomer_display_custom_field_on_product_page', 20);
+
+function bbloomer_display_custom_field_on_product_page()
+{
+  global $product;
+
+  if ($product->is_type('variable')) {
+  ?>
+    <div class="price-per-serving-wrapper">
+      <span id="price_per_serving_label"><?php _e('Price per Serving:', 'woocommerce'); ?></span>
+      <span id="price_per_serving_value"></span>
+    </div>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        // When the variation is selected, this event is triggered
+        $('form.variations_form').on('show_variation', function(event, variation) {
+          if (variation.price_per_serving) {
+            $('#price_per_serving_value').text(variation.price_per_serving);
+          } else {
+            $('#price_per_serving_value').text('<?php _e('N/A', 'woocommerce'); ?>');
+          }
+        });
+
+        // When no variation is selected or reset
+        $('form.variations_form').on('reset_data', function() {
+          $('#price_per_serving_value').text('');
+        });
+      });
+    </script>
+<?php
+  }
+}
+add_filter('woocommerce_available_variation', 'bbloomer_add_custom_field_to_variation_data');
+
+function cw_change_product_price_display($price)
+{
+  global $product;
+
+  if ($product->is_type('variable')) {
+    $price .=
+      '<div class="price-per-serving-wrapper">
+        <span id="price_per_serving_label">' . __("Cena za porcje:", "woocommerce") . '</span>
+        <span id="price_per_serving_value"></span>  ' . get_woocommerce_currency_symbol() . '
+      </div>';
+  }
+
+  return $price;
+}
+add_filter('woocommerce_get_price_html', 'cw_change_product_price_display');
+
+function bbloomer_add_custom_field_to_variation_data($variation_data)
+{
+  $price_per_serving = get_post_meta($variation_data['variation_id'], 'price_per_serving', true);
+  $variation_data['price_per_serving'] = $price_per_serving ? esc_attr($price_per_serving) : '';
+
+  return $variation_data;
+}

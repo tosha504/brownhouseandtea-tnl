@@ -438,3 +438,42 @@ function get_most_popular_posts($num_posts = 3)
 
 	wp_reset_postdata();
 }
+
+// add_filter( 'relevanssi_live_search_base_styles', '__return_false' );
+
+// function add_async_defer_attributes( $tag, $handle, $src ) {
+// 	// Add async attribute to specific scripts
+// 	$async_scripts = array(
+// 			'query-monitor',
+// 			'wc-add-to-cart',
+// 			'wc-cart-fragments',
+// 			'slick_theme_functions',
+// 			'start_functions',
+// 			'sourcebuster-js',
+// 			'cwginstock_js',
+// 			'sweetalert2'
+// 	);
+
+// 	// Add defer attribute to specific scripts
+// 	$defer_scripts = array(
+// 			'woocommerce',
+// 			'flexible_shipping_notices',
+// 			'wc-order-attribution',
+// 			'xoo-wsc-main-js',
+// 			'jquery-blockui',
+// 			'cwginstock_popup'
+// 	);
+
+// 	// Add async
+// 	if ( in_array( $handle, $async_scripts ) ) {
+// 			return str_replace( ' src', ' async="async" src', $tag );
+// 	}
+
+// 	// Add defer
+// 	if ( in_array( $handle, $defer_scripts ) ) {
+// 			return str_replace( ' src', ' defer="defer" src', $tag );
+// 	}
+
+// 	return $tag;
+// }
+// add_filter( 'script_loader_tag', 'add_async_defer_attributes', 10, 3 );

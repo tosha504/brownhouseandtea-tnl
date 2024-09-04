@@ -76,6 +76,9 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 </div>
 
 <div class="search-form-tnl">
+	<div class="container close-btn">
+		<button id="closeSeachForm" aria-label="Close search form"><span></span><span></span></button>
+	</div>
 	<div class="container">
 		<form role="search" method="get" class="search-form" action="/">
 			<label>
@@ -83,12 +86,27 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 				<input type="search" class="search-field" placeholder="Search …" name="s"
 					data-rlvlive="true" data-rlvparentel="#rlvlive" data-rlvconfig="default">
 			</label>
-			<button id="closeSeachForm" aria-label="Close search form"><span></span><span></span></button>
 			<div id="rlvlive"></div>
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		// When the variation is selected, this event is triggered
+		$("form.variations_form").on("show_variation", function(event, variation) {
+			if (variation.price_per_serving) {
+				$("#price_per_serving_value").text(variation.price_per_serving);
+			} else {
+				$(".price-per-serving-wrapper").hide();
+			}
+		});
 
+		// When no variation is selected or reset
+		$("form.variations_form").on("reset_data", function() {
+			$("#price_per_serving_value").text("");
+		});
+	});
+</script>
 </div><!-- #page -->
 <div class="overlay"></div>
 

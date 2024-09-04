@@ -1,0 +1,22 @@
+.relevanssi-live-search-result {
+  padding: 10px;
+  a {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    img {
+      border-radius: 20px;
+      flex: 1 1 100%;
+      max-width: 100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    p {
+      border: none;
+    }
+  }
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--dark-green-hover);
+  }
+}
