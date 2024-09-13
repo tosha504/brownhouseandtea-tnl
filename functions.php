@@ -477,3 +477,11 @@ function get_most_popular_posts($num_posts = 3)
 // 	return $tag;
 // }
 // add_filter( 'script_loader_tag', 'add_async_defer_attributes', 10, 3 );
+add_filter('woocommerce_account_menu_items', 'remove_my_account_tabs', 999);
+
+function remove_my_account_tabs($items)
+{
+	unset($items['downloads']);
+
+	return $items;
+}

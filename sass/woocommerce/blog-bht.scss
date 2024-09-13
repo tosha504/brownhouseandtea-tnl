@@ -12,25 +12,27 @@
     .cta,
     .item {
       flex: 1 1 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+
       @media (min-width: map-get($grid-breakpoints, md)) {
         flex: 0 1 calc((100% / 2) - 30px);
       }
       @media (min-width: map-get($grid-breakpoints, xl)) {
         flex: 0 1 calc((100% / 3) - 30px);
       }
-      border-radius: 20px;
-      overflow: hidden;
-      height: inherit;
-      display: flex;
-      flex-direction: column;
     }
 
     .cta {
       padding: 30px 20px;
+      background: var(--light-green);
+
       @media (min-width: map-get($grid-breakpoints, lg)) {
         padding: 50px;
       }
-      background: var(--light-green);
 
       &__pre-title {
         text-transform: uppercase;
@@ -67,6 +69,8 @@
 
     .item {
       transition: 0.25s;
+      box-shadow: 2px 4px 12px #00000014;
+
       @media (hover: hover) {
         &:hover {
           transform: scale(1.02);
@@ -78,7 +82,6 @@
         transition: 0.3s;
       }
 
-      box-shadow: 2px 4px 12px #00000014;
       &__wrap {
         padding: 35px;
         display: flex;

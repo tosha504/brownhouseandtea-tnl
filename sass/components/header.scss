@@ -1,4 +1,8 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  transition: 0.25s;
   ul {
     list-style: none;
   }
@@ -14,9 +18,6 @@
       }
     }
     p {
-      @media (min-width: map-get($grid-breakpoints, md)) {
-        margin: 0 auto;
-      }
       margin-right: auto;
       color: var(--white);
     }
@@ -42,11 +43,6 @@
       }
     }
   }
-
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  transition: 0.25s;
 
   .container,
   &__nav {
@@ -110,12 +106,13 @@
     .search-link,
     .cart-link,
     .account-link {
+      transition: 0.3s;
       @media (hover: hover) {
         &:hover {
           background-color: var(--dark-green);
         }
       }
-      transition: 0.3s;
+
       a {
         padding: 10px;
         line-height: 0;
@@ -159,13 +156,10 @@
           // transform: rotate(90deg);
         }
         .count {
-          z-index: 20;
+          z-index: 4;
           display: block;
           width: 20px;
           height: 20px;
-          // top: -5px;
-          // right: -5px;
-          // top: 50%;
           left: -5px;
           top: -5px;
           // transform: translateY(-50%);

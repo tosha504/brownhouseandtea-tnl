@@ -125,8 +125,16 @@
   }
 
   &__bottom {
+    flex: 1 1 100%;
+    padding: 10px 0;
+    justify-content: space-between;
+
     &,
     &_left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
       a {
         @extend %after-border;
         @media (hover: hover) {
@@ -136,15 +144,9 @@
         }
       }
 
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
       @media (min-width: map-get($grid-breakpoints, lg)) {
         gap: 80px;
       }
     }
-    flex: 1 1 100%;
-    padding: 10px 0;
-    justify-content: space-between;
   }
 }

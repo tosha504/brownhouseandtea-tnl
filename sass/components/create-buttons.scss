@@ -8,8 +8,8 @@
     background-color: var(--dark-green);
     @media (hover: hover) {
       &:hover {
-        background-color: var(--dark-green-hover);
-        border: 2px solid var(--dark-green-hover);
+        background-color: var(--dark);
+        border: 2px solid var(--dark);
         color: var(--white);
       }
     }

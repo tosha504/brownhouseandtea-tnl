@@ -2,6 +2,8 @@ body {
   &.single {
     &.single-product {
       .woocommerce-breadcrumb {
+        font-weight: 600;
+        margin-bottom: 30px;
         &,
         a {
           color: var(--dark-green);
@@ -11,8 +13,6 @@ body {
           font-weight: 300;
           @extend %after-border;
         }
-        font-weight: 600;
-        margin-bottom: 30px;
       }
 
       .woocommerce-product-gallery {
@@ -72,11 +72,12 @@ body {
         }
       }
       .flex-control-nav {
+        margin-top: 20px !important;
+
         .slick-track {
           gap: 20px;
         }
 
-        margin-top: 20px !important;
         li {
           border-radius: 20px;
           overflow: hidden;
@@ -270,10 +271,10 @@ body {
         flex-wrap: wrap;
         gap: 15px;
         &__wrap {
+          padding-left: 30px;
           @media (min-width: map-get($grid-breakpoints, lg)) {
             flex: 1 1 calc(50% - 20px);
           }
-          padding-left: 30px;
           &-title {
             font-size: 15px;
             position: relative;
@@ -319,6 +320,7 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 0px 5px;
+        justify-content: center;
         align-items: center;
       }
 
@@ -332,10 +334,10 @@ body {
       }
 
       .variations_form.cart {
+        margin-bottom: 0;
         div[data-product_id] {
           width: 100%;
         }
-        margin-bottom: 0;
       }
 
       .stock {
@@ -449,6 +451,10 @@ body {
           text-transform: uppercase;
           box-shadow: none !important;
           font-size: 14px;
+          background-color: transparent;
+          border: 3px solid var(--dark-green);
+          color: var(--dark-green);
+
           &[aria-checked="true"] {
             background: var(--dark-green) !important;
             color: var(--white) !important;
@@ -460,9 +466,6 @@ body {
             }
           }
 
-          background-color: transparent;
-          border: 3px solid var(--dark-green);
-          color: var(--dark-green);
           @media (hover: hover) {
             &:hover {
               background-color: var(--dark-green);

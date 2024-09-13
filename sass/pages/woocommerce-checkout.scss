@@ -4,6 +4,7 @@ body {
 
     .site-main {
       .container {
+        margin: 50px auto;
         .woocommerce-error {
           margin: 0;
         }
@@ -52,7 +53,6 @@ body {
           }
         }
 
-        margin: 50px auto;
         .woocommerce-form-login-toggle {
           .woocommerce-info {
             padding: 1em 2em;
@@ -94,11 +94,11 @@ body {
           &.woocommerce-checkout {
             display: flex;
             gap: 30px 50px;
+            flex-wrap: wrap;
             @media (min-width: map-get($grid-breakpoints, xl)) {
               gap: 30px 100px;
             }
 
-            flex-wrap: wrap;
             .woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout,
             .woocommerce-NoticeGroup.woocommerce-NoticeGroup-updateOrderReview {
               flex: 1 1 100%;
@@ -151,14 +151,15 @@ body {
 
             .right {
               padding: 20px;
+              background-color: var(--white);
+              border-radius: 30px;
+              height: fit-content;
+
               @media (min-width: map-get($grid-breakpoints, md)) {
                 padding: 40px;
                 position: sticky;
                 top: 170px;
               }
-              background-color: var(--white);
-              border-radius: 30px;
-              height: fit-content;
 
               #place_order {
                 background-color: var(--light-green);

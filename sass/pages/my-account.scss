@@ -7,6 +7,57 @@ body {
         background-color: var(--light-green-opacity);
         border-radius: 30px;
 
+        &.my-account-tnl {
+          display: flex;
+          gap: 20px;
+
+          .woocommerce-MyAccount-navigation-tnl {
+            flex: 0 1 20%;
+
+            ul {
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+
+              li {
+                &.is-active {
+                  font-weight: 700;
+                  @media (hover: hover) {
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+
+          .woocommerce-MyAccount-content-tnl {
+            flex: 1 1 80%;
+
+            p {
+              &:nth-child(2) {
+                margin-bottom: 20px;
+              }
+            }
+
+            form {
+              p {
+                margin: 5px 0;
+              }
+            }
+
+            fieldset {
+              border: none;
+            }
+
+            a {
+              &.edit {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
         h2 {
           font-size: clamp(25px, 5vw, 37px);
         }

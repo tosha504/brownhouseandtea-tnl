@@ -5,6 +5,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  // outline: 4px solid red;
 }
 
 html,
@@ -22,6 +23,9 @@ body {
 }
 
 body {
+  scrollbar-width: 10px;
+  overflow-x: hidden;
+
   &.home {
     .header {
       position: fixed;
@@ -34,10 +38,6 @@ body {
       background-color: var(--white);
     }
   }
-
-  scrollbar-width: 10px;
-  // scrollbar-color: $black;
-  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 13px;
@@ -124,14 +124,14 @@ h2 {
 
 ul {
   &.triangle {
+    list-style: none;
+    flex-direction: column;
     &,
     li {
       display: flex;
       gap: 20px;
     }
-    list-style: none;
 
-    flex-direction: column;
     li {
       align-items: baseline;
       &::before {
