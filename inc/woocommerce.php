@@ -89,6 +89,9 @@ remove_action('woocommerce_single_product_summary', 'woocommerce_template_single
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
+// remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+// remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 
@@ -96,10 +99,14 @@ remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
-add_action('woocommerce_after_single_product', function () { ?>
-  <section class="product-featured-bht ">
-    <div class="container">
+add_action('woocommerce_after_single_product', 'product_featured_bht');
 
+add_action('woocommerce_after_checkout_form', 'product_featured_bht');
+
+function product_featured_bht()
+{ ?>
+  <section class="product-featured-bht">
+    <div class="container">
       <div class="product-featured-bht__title">
         <h4 style="font-size: clamp(40px, 3vw, 60px);text-align: center;">Podobne produkty</h4>
       </div>
@@ -146,7 +153,7 @@ add_action('woocommerce_after_single_product', function () { ?>
     </div>
 
   </section>
-<?php });
+<?php }
 
 remove_action('woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10);
 // Add actions bht
@@ -160,10 +167,6 @@ add_action('woocommerce_before_shop_loop', function () { ?>
   </aside>
 <?php
 }, 40);
-
-add_action('woocommerce_shop_loop_header', function () {
-  echo `sdf`;
-}, 10);
 
 add_filter('woocommerce_get_image_size_gallery_thumbnail', 'override_woocommerce_image_size_gallery_thumbnail');
 function override_woocommerce_image_size_gallery_thumbnail($size)
@@ -442,7 +445,7 @@ function cw_change_product_price_display($price)
 {
   global $product;
 
-  if ($product->is_type('variable')) {
+  if ($product->is_type('variable') && is_product()) {
     $price .=
       '<div class="price-per-serving-wrapper">
         <span id="price_per_serving_label">' . __("Cena za porcje:", "woocommerce") . '</span>
@@ -452,7 +455,7 @@ function cw_change_product_price_display($price)
 
   return $price;
 }
-add_filter('woocommerce_get_price_html', 'cw_change_product_price_display');
+add_filter('woocommerce_get_price_html', 'cw_change_product_price_display', 10, 2);
 
 function bbloomer_add_custom_field_to_variation_data($variation_data)
 {

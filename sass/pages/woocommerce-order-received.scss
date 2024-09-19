@@ -1,0 +1,36 @@
+body {
+  &.woocommerce-order-received {
+    h2 {
+      margin-bottom: 20px;
+    }
+    .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
+      font-weight: 700;
+      margin-bottom: 2em;
+    }
+    .woocommerce-thankyou-order-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      @media (max-width: map-get($grid-breakpoints, md)) {
+        &::before {
+          content: none;
+        }
+      }
+      li {
+        margin-right: 2em;
+        text-transform: uppercase;
+        font-size: 0.715em;
+        line-height: 1;
+
+        padding-right: 2em;
+        @media (max-width: map-get($grid-breakpoints, md)) {
+          flex: 1 1 50%;
+          border-right: none;
+        }
+        strong {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,15 @@
 .error {
-  &_content-title {
+  padding: 50px 0;
+  text-align: center;
+  &_content-title,
+  &_content-descr {
     color: #000;
-    @include fontz(20px, 10);
+
     font-weight: 500;
+  }
+
+  &_content-title {
+    font-size: clamp(16px, 5vw, 30px);
   }
 }
 
@@ -10,9 +17,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  @include fontz(100px, 200);
-
+  font-size: 200px;
   a {
-    color: $primaryTheme;
+    font-family: var(--spirit);
+    color: var(--dark);
   }
 }

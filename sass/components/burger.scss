@@ -4,13 +4,14 @@
   position: relative;
   cursor: pointer;
   z-index: 6;
+  margin-left: 10px;
 
   span {
     display: none;
-    width: 40px;
-    height: 4px;
+    width: 30px;
+    height: 3px;
     background-color: var(--dark);
-    margin: 6px 0;
+    margin: 7px 0;
     transition: 0.4s;
 
     &.active {

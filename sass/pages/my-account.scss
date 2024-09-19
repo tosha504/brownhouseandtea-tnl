@@ -3,24 +3,38 @@ body {
     main {
       padding: 50px 0;
       .container {
-        padding: 50px;
         background-color: var(--light-green-opacity);
         border-radius: 30px;
-
+        padding: 20px 15px;
+        @media (min-width: map-get($grid-breakpoints, md)) {
+          padding: 50px;
+        }
         &.my-account-tnl {
           display: flex;
           gap: 20px;
+          flex-wrap: wrap;
+
+          .woocommerce-MyAccount-navigation-tnl,
+          .woocommerce-MyAccount-content-tnl {
+            flex: 1 1 100%;
+          }
 
           .woocommerce-MyAccount-navigation-tnl {
-            flex: 0 1 20%;
+            @media (max-width: map-get($grid-breakpoints, md)) {
+              overflow-x: auto;
+            }
+            @media (min-width: map-get($grid-breakpoints, md)) {
+              flex: 0 1 calc(20% - 20px);
+            }
 
             ul {
               list-style: none;
               display: flex;
-              flex-direction: column;
               gap: 10px;
+              flex-direction: column;
 
               li {
+                flex: 1 1 100%;
                 &.is-active {
                   font-weight: 700;
                   @media (hover: hover) {
@@ -32,7 +46,9 @@ body {
           }
 
           .woocommerce-MyAccount-content-tnl {
-            flex: 1 1 80%;
+            @media (min-width: map-get($grid-breakpoints, md)) {
+              flex: 1 1 calc(80% - 20px);
+            }
 
             p {
               &:nth-child(2) {
@@ -53,6 +69,21 @@ body {
             a {
               &.edit {
                 font-size: 12px;
+              }
+            }
+          }
+
+          .woocommerce-order-details,
+          .woocommerce-customer-details {
+            h2 {
+              margin-bottom: 2em;
+            }
+          }
+
+          .woocommerce-customer-details {
+            address {
+              @media (max-width: map-get($grid-breakpoints, md)) {
+                margin-bottom: 2em;
               }
             }
           }

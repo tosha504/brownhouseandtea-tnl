@@ -200,18 +200,49 @@
           }
         }
       }
+
       &.menu-item-has-children {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        &::after {
+          content: "";
+          transition: 0.3s;
+          display: block;
+          width: 10px;
+          height: 10px;
+          background: url(../assets/icons/arrow.svg) no-repeat center/cover;
+        }
+        @media (max-width: map-get($grid-breakpoints, xl)) {
+          flex-wrap: wrap;
+          &::after {
+            order: 2;
+          }
+
+          &.active {
+            > a {
+              color: var(--red-theme);
+            }
+            &:after {
+              transform: rotate(180deg);
+            }
+          }
+
+          .sub-menu {
+            flex: 1 1 100%;
+            order: 3;
+          }
+        }
+
         @media (min-width: map-get($grid-breakpoints, xl)) {
-          position: relative;
           .sub-menu {
             width: auto;
-            // background-color: var(--light-green-opacity);
-            border-radius: 5px;
-            display: flex;
+            display: none;
             gap: 10px;
             flex-direction: column;
             position: absolute;
-            padding: 10px 20px;
+            padding: 20px 20px;
             z-index: 5;
             left: -20px;
             top: 100%;
@@ -220,20 +251,19 @@
             transition: 0.35s;
             li {
               width: 200px;
-              a {
-                font-weight: 500;
-                // font-size: 14px;
-                // white-space: nowrap;
-              }
             }
           }
         }
 
         @media (hover: hover) {
           &:hover {
+            &::after {
+              transform: rotate(180deg);
+            }
             .sub-menu {
               opacity: 1;
               visibility: visible;
+              display: flex;
             }
           }
         }
@@ -255,10 +285,19 @@
 
       &.active {
         width: 75vw;
+        left: 0;
         @media (min-width: map-get($grid-breakpoints, sm)) {
           width: 50vw;
         }
-        left: 0;
+
+        &::before {
+          content: "Menu";
+          position: absolute;
+          top: 25px;
+          right: 25px;
+          text-transform: uppercase;
+          font-weight: 500;
+        }
 
         a {
           font-size: 16px;

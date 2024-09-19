@@ -59,7 +59,7 @@
 	}
 
 	while (have_posts()) :
-		the_post(); ?>
+		the_post();  ?>
 		<div class="relevanssi-live-search-result" id="" aria-selected="false">
 			<a href="<?php echo esc_url(get_permalink()); ?>">
 				<?php echo get_the_post_thumbnail(); ?><p><?php the_title(); ?></p>

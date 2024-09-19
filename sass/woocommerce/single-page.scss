@@ -320,7 +320,6 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 0px 5px;
-        justify-content: center;
         align-items: center;
       }
 
@@ -372,13 +371,16 @@ body {
         display: flex;
         .quantity {
           display: flex;
-          flex: 1 1 20%;
+          flex: 1 1 25%;
           border: 1px solid var(--dark-green);
           justify-content: space-between;
           border-radius: 50px;
           margin-right: 20px !important;
           background-color: var(--white);
           overflow: hidden;
+          @media (max-width: map-get($grid-breakpoints, md)) {
+            flex: 1 1 35%;
+          }
 
           button,
           input {

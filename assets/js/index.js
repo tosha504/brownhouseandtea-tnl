@@ -106,14 +106,23 @@ jQuery(document).ready(function () {
     jQuery('.age-verefication').css('display', 'block');
   }
   jQuery('div.woocommerce').on('change', 'input.qty', function () {});
-  jQuery(window).on('click', function (e) {
-    if (body.hasClass('single-product')) {
-      console.log(body.hasClass('single-product'));
-      if (jQuery(e.target).attr('class') === 'backorder-button') {
-        alert('You are now on the waitlist for this product!');
+  function mobNavMenu() {
+    jQuery(".menu-item-has-children").on("click", function (e) {
+      jQuery(jQuery(this)).children("ul .sub-menu").slideToggle(500);
+      if (jQuery(jQuery(this)).siblings().children("ul .sub-menu").css("display") == "block") {
+        jQuery(jQuery(this)).siblings().children("ul .sub-menu").slideUp(500);
       }
-    }
-  });
+      if (!jQuery(this).hasClass("active")) {
+        jQuery(this).toggleClass("active");
+        jQuery(this).siblings('.menu-item-has-children.active').toggleClass("active");
+      } else {
+        jQuery(this).removeClass("active");
+      }
+    });
+  }
+  if (jQuery(window).width() < 1200) {
+    mobNavMenu();
+  }
   jQuery(".product-featured-bht__slider").slick({
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -148,14 +157,6 @@ jQuery(document).ready(function () {
       "border-radius": "20px"
     });
   });
-
-  //shop-page
-  jQuery('.overlay').on('click', function (e) {
-    if (sidebar.hasClass('active')) {
-      sidebar.removeClass('active');
-      jQuery(this).removeClass('active');
-    }
-  });
   jQuery('#checkout_apply_coupon').click(function (ev) {
     ev.preventDefault();
     var code = jQuery('#checkout_coupon_code').val();
@@ -177,14 +178,25 @@ jQuery(document).ready(function () {
   });
 
   //shop-page
+  jQuery('.overlay').on('click', function (e) {
+    if (sidebar.hasClass('active')) {
+      sidebar.removeClass('active');
+      jQuery(this).removeClass('active');
+      body.removeClass("fixed-page");
+    }
+  });
+
+  //shop-page
   jQuery('.filter-call').on('click', function (e) {
     e.preventDefault();
+    body.addClass("fixed-page");
     sidebar.addClass('active');
     jQuery('.overlay').addClass('active');
   });
   jQuery('#close-aside-button').on('click', function (e) {
     e.preventDefault();
     sidebar.removeClass('active');
+    body.removeClass("fixed-page");
     jQuery('.overlay').removeClass('active');
   });
   if (jQuery(window).width() < 990) {
@@ -195,7 +207,6 @@ jQuery(document).ready(function () {
       if (siblingsChildren.hasClass('active')) {
         siblingsChildren.removeClass('active');
       }
-      console.log(curerentChildren.hasClass('active'));
       if (curerentChildren.hasClass('active')) {
         curerentChildren.removeClass('active');
       } else {

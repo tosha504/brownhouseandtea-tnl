@@ -81,6 +81,14 @@ body {
           }
         }
 
+        .woocommerce-customer-details {
+          address {
+            @media (max-width: map-get($grid-breakpoints, md)) {
+              margin-bottom: 2em;
+            }
+          }
+        }
+
         .woocommerce-billing-fields__field-wrapper {
           display: flex;
           flex-direction: column;
@@ -222,6 +230,7 @@ body {
                                 border: none;
                                 font-size: 16px;
                                 background-color: var(--white);
+                                color: var(--dark-green);
                               }
                               button {
                                 flex: 1 1 30%;
