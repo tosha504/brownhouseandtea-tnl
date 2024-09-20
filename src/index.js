@@ -233,7 +233,7 @@ jQuery(document).ready(function () {
   })
 
   if (jQuery(window).width() < 990) {
-    jQuery('.woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
+    jQuery('.products .woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
       e.preventDefault()
       const siblingsChildren = jQuery(this).parent().siblings().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
       const curerentChildren = jQuery(this).parent().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');

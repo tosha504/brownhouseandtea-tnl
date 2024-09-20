@@ -200,7 +200,7 @@ jQuery(document).ready(function () {
     jQuery('.overlay').removeClass('active');
   });
   if (jQuery(window).width() < 990) {
-    jQuery('.woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
+    jQuery('.products .woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
       e.preventDefault();
       var siblingsChildren = jQuery(this).parent().siblings().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
       var curerentChildren = jQuery(this).parent().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
