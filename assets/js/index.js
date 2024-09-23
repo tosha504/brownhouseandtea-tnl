@@ -172,7 +172,6 @@ jQuery(document).ready(function () {
         setTimeout(function () {
           jQuery(document.body).trigger('update_checkout');
         }, 500);
-        console.log(returned_data + code);
       }
     });
   });
@@ -235,14 +234,14 @@ jQuery(document).ready(function () {
     jQuery('.quantity').show();
     jQuery(".backorder-button").remove();
   });
+  body.on('click', '.toggler-variation', function (e) {
+    e.preventDefault();
+    var parent = jQuery(this).parent();
+    jQuery(this).toggleClass('active');
+    jQuery(parent).find('ul').toggleClass('active');
+  });
   loop_select_variable();
   function loop_select_variable() {
-    jQuery('.toggler-variation').click(function (e) {
-      e.preventDefault();
-      var parent = jQuery(this).parent();
-      jQuery(this).toggleClass('active');
-      jQuery(parent).find('ul').toggleClass('active');
-    });
     jQuery('.select-variation ul li').click(function (e) {
       e.preventDefault();
       var btn = jQuery(this).parent().parent().find('.add_to_cart_button'),
@@ -252,7 +251,6 @@ jQuery(document).ready(function () {
         id = jQuery(this).attr('data-id'),
         price = jQuery(this).attr('data-price'),
         stock = jQuery(this).parent().parent().parent().find('.stock-label-loop');
-      console.log(price);
       btn.closest('.product.type-product').find('a.woocommerce-LoopProduct-link.woocommerce-loop-product__link div.thumbnail-wrap img').attr('srcset', jQuery(this).attr('image-url-data'));
       if (jQuery(this).attr('stock-data') == 'in-stock') {
         jQuery(btn_stock).css('display', 'none');
@@ -301,7 +299,6 @@ jQuery(document).ready(function () {
     jQuery('.xoo-wsc-modal').toggleClass('xoo-wsc-cart-active');
   });
   jQuery(document).on('click', '.question', function (e) {
-    console.log(jQuery(this).parent().siblings().children('div.answer').is(':visible'));
     if (jQuery(this).parent().siblings().children('div.answer').is(':visible')) {
       jQuery(this).parent().siblings().children('.question').children('button').removeClass('active');
       jQuery(this).parent().siblings().children('div.answer').slideUp(200);
