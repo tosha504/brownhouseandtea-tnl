@@ -83,7 +83,7 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 		<form role="search" method="get" class="search-form" action="/">
 			<label>
 				<span class="screen-reader-text">Search for:</span>
-				<input type="search" class="search-field" placeholder="Search …" name="s"
+				<input type="search" class="search-field" placeholder="<?php _e("Search …", "bht-tnl"); ?>" name="s"
 					data-rlvlive="true" data-rlvparentel="#rlvlive" data-rlvconfig="default">
 			</label>
 			<input type="hidden" name="post_type" value="product">
@@ -110,19 +110,12 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 	});
 </script>
 
-<script>
-	// document.querySelector('.search-form').addEventListener('keydown', function(event) {
-	// 	// Check if the key pressed is "Enter" or mobile equivalent
-	// 	if (event.key === 'Enter' || event.key === 'Go' || event.key === 'Done') {
-	// 		event.preventDefault(); // Block form submission
-	// 	}
-	// });
-</script>
+
 <div class="overlay"></div>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
-</script>
+
 </body>
 
 </html>

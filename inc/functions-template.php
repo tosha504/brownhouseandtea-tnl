@@ -56,7 +56,7 @@ function my_custom_image($attachment_id)
 
 function create_buttons($banner_buttons)
 {
-  if (!empty($banner_buttons) && count($banner_buttons) > 0) { ?>
+  if (!empty($banner_buttons) && count($banner_buttons, COUNT_RECURSIVE) > 2) { ?>
     <div class="content-buttons">
       <?php
       foreach ($banner_buttons as $key => $button) {

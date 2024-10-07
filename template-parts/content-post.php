@@ -24,7 +24,7 @@
 		else :
 			the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 		endif;
-		echo get_the_post_thumbnail(); ?>
+		echo get_the_post_thumbnail(get_the_ID(), 'full'); ?>
 		<div class="text-container">
 			<?php the_content();
 			// Get tags for the current post

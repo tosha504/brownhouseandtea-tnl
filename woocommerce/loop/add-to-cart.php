@@ -44,7 +44,11 @@ if ($product->get_type() != 'variable') {
       $args
     );
   } else {
-    echo '<span class="stock-label-loop" style="display: block;">' . __('wracam już 1 kwietnia', 'bht-tnl') . '</span>'; ?>
+    $coming_back = get_field('coming_back');
+    if (!empty($coming_back)) {
+      echo '<span class="stock-label-loop" style="display: block;">' . $coming_back . '</span>';
+    }
+?>
     <div class="add-to-cart-wrap-single">
       <a href="<?php echo get_permalink($product->get_id()); ?>?outofstock" class="backorder-button loop-not-stock single">Powiadom o dostępności</a>
       <?php
@@ -107,6 +111,7 @@ if ($product->get_type() != 'variable') {
         } else {
           // echo '<span class="stock-label-loop" style="display: block;">' . __('Out', 'bht-tnl') . '</span>';
           //<button type="button" class="backorder-button loop-not-stock">Powiadom o dostępności12 12132</button>
+          echo '<div class="add-to-cart-wrap">';
         }
       }
       echo '<a href="' . get_permalink($product->get_id()) . '" class="button  mt-loop">' . __('Dowiedz się więcej', 'bht-tnl') . '</a></div>';

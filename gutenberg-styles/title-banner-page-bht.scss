@@ -1,0 +1,24 @@
+@use "../sass/components/_varibles" as v;
+
+.title-banner-page-bht {
+  padding: 25px 0;
+
+  @media (min-width: map-get(v.$grid-breakpoints, md)) {
+    padding: 40px 0;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    @for $i from 1 through 6 {
+      h#{$i} {
+        text-align: center;
+        padding: 20px 0;
+        @media (min-width: map-get(v.$grid-breakpoints, md)) {
+          padding: 40px 0;
+        }
+      }
+    }
+  }
+}

@@ -61,7 +61,7 @@ $order_button_text = __('I buy and pay', 'bht-tnl');
 		<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 		<div>
-			<h3 id="order_review_heading"><?php esc_html_e('4.Your order', 'woocommerce'); ?></h3>
+			<h3 id="order_review_heading"><?php esc_html_e('4.Your order', 'bht-tnl'); ?></h3>
 			<br>
 
 			<?php do_action('woocommerce_checkout_order_review'); ?>

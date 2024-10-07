@@ -75,6 +75,10 @@ function custom_block_theme_acf_enqueue_scripts()
 	if (has_block('acf/isnspirations-bht', get_queried_object_id())) {
 		wp_enqueue_script('isnspirations-bht', get_template_directory_uri() . "/blocks/isnspirations-bht/isnspirations-bht.js", array('jquery', 'slick_theme_functions'), '1.0.0', true);
 	}
+
+	if (has_block('acf/meet-our-team-bht', get_queried_object_id())) {
+		wp_enqueue_script('meet-our-team-bht', get_template_directory_uri() . "/blocks/meet-our-team-bht/meet-our-team-bht.js", array('jquery', 'slick_theme_functions'), '1.0.0', true);
+	}
 }
 add_action('wp_enqueue_scripts', 'custom_block_theme_acf_enqueue_scripts');
 add_action('admin_enqueue_scripts', 'custom_block_theme_acf_enqueue_scripts');
@@ -85,17 +89,6 @@ add_action('wp_ajax_nopriv_update_order_review', 'update_order_review');
 
 function update_order_review()
 {
-	// $values = array();
-	// parse_str($_POST['post_data'], $values);
-	// $cart = $values['cart'];
-
-	// foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-	// 	WC()->cart->set_quantity($cart_item_key, $cart_item['qty'],);
-	// }
-
-
-
-	// print_r($_POST);
 	WC()->cart->cart_contents[$_POST['key']]['quantity'] = $_POST['qty'];
 	WC()->cart->calculate_totals();
 

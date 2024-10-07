@@ -23,8 +23,9 @@ global $product;
 if (empty($product) || !$product->is_visible()) {
 	return;
 }
+$backgroundcolor = get_field('backgroundcolor', get_the_ID()) ?? '';
 ?>
-<li <?php wc_product_class('', $product); ?>>
+<li <?php wc_product_class('', $product); ?> <?php echo 'style="background:' . $backgroundcolor . '"'; ?>>
 	<?php
 	/**
 	 * Hook: woocommerce_before_shop_loop_item.

@@ -21,14 +21,18 @@ if (!empty($block['anchor'])) {
 $content = get_field('content');
 $banner_buttons = get_field('banner_buttons');
 $image_leftright = get_field('image_leftright') !== 'right' ? 'style="flex-direction: row-reverse;"' : '';
-$image = !empty(get_field('image')) ? get_field('image') : ''; ?>
+$image = !empty(get_field('image')) ? get_field('image') : '';
+$quote_color_bht = !empty(get_field('quote_color_bht')) ? 'style="background:' . get_field('quote_color_bht') . '"' : '';
+$quate_text_bht = !empty(get_field('quate_text_bht')) ? '<div class="image-content-bht__left_text" ' . $quote_color_bht . '>' . get_field('quate_text_bht') . '</div>' : ''; ?>
 
 <section class="image-content-bht">
   <div class="container" <?php echo $image_leftright; ?>>
     <div class="image-content-bht__left">
       <?php
       echo $content;
-      create_buttons($banner_buttons); ?>
+      create_buttons($banner_buttons);
+      echo "&nbsp;";
+      echo $quate_text_bht; ?>
     </div>
     <div class="image-content-bht__right">
       <?php

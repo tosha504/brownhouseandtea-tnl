@@ -19,12 +19,12 @@ get_header(); ?>
         'post_type' => 'post',
         'post_status' => 'publish',
       );
-      $last_posts = new WP_Query($args);
-      if ($last_posts->have_posts()) {
+      $last_posts_bht = new WP_Query($args);
+      if ($last_posts_bht->have_posts()) {
         echo '<h2 class="small">Najnowsze wpisy</h2>';
         echo '<ul class="new-posts">';
-        while ($last_posts->have_posts()) {
-          $last_posts->the_post();  ?>
+        while ($last_posts_bht->have_posts()) {
+          $last_posts_bht->the_post();  ?>
           <li>
             <a href="<?php echo get_the_permalink(); ?>">
               <?php echo my_custom_image(get_post_thumbnail_id()); ?>

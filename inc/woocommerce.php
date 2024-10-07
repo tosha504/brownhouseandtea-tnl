@@ -101,29 +101,32 @@ remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_di
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 add_action('woocommerce_after_single_product', 'product_featured_bht');
 
-add_action('woocommerce_after_checkout_form', 'product_featured_bht');
+add_action('woocommerce_after_checkout_form', 'product_featured_bht_checkout');
 
 function product_featured_bht()
-{ ?>
+{
+  $upsell_ids = get_post_meta(get_the_ID(), '_upsell_ids', true);
+  if (empty($upsell_ids)) {
+    return []; // Return an empty array if there are no upsell products
+  } ?>
   <section class="product-featured-bht">
     <div class="container">
       <div class="product-featured-bht__title">
         <h4 style="font-size: clamp(40px, 3vw, 60px);text-align: center;">Podobne produkty</h4>
       </div>
       <?php
+
       $args = array(
-        'post_type' => 'product',
+        'post_type' => ['product', 'product_variation'],
         'posts_per_page' => 8,
-        'tax_query' => array(
-          array(
-            'taxonomy' => 'product_visibility',
-            'field'    => 'name',
-            'terms'    => 'featured',
-            'operator' => 'IN',
-          ),
-        ),
+        'post__in' => $upsell_ids, // Use the upsell IDs in the query
+        // 'post_status'    => 'publish', // Only show published products
+        'orderby'        => 'title',   // Optional: order by title (you can change this)
+        'order'          => 'ASC',
       );
+
       $loop = new WP_Query($args);
+
       if ($loop->have_posts()) { ?>
         <ul class="product-featured-bht__slider">
           <?php while ($loop->have_posts()) : $loop->the_post(); ?>
@@ -145,10 +148,71 @@ function product_featured_bht()
           ?>
 
         </ul>
-      <?php } else {
+      <?php
+        wp_reset_postdata();
+      } else {
         echo __('No products found', 'bht-tnl');
       }
-      wp_reset_postdata();
+
+      ?>
+    </div>
+
+  </section>
+<?php }
+
+
+function product_featured_bht_checkout()
+{
+?>
+  <section class="product-featured-bht">
+    <div class="container">
+      <div class="product-featured-bht__title">
+        <h4 style="font-size: clamp(40px, 3vw, 60px);text-align: center;">Podobne produkty</h4>
+      </div>
+      <?php
+
+      $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => 8,
+        'tax_query' => array(
+          array(
+            'taxonomy' => 'product_visibility',
+            'field'    => 'name',
+            'terms'    => 'featured',
+            'operator' => 'IN',
+          ),
+        ),
+      );
+
+      $loop = new WP_Query($args);
+
+      if ($loop->have_posts()) { ?>
+        <ul class="product-featured-bht__slider">
+          <?php while ($loop->have_posts()) : $loop->the_post(); ?>
+            <li class="product">
+              <a href="<?php echo get_permalink(); ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                <div class="thumbnail-wrap">
+                  <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="  <?php echo get_post(get_post_thumbnail_id())->post_title; ?>" loading="lazy">
+                </div>
+                <?php bbloomer_show_sale_percentage_loop() ?>
+                <h5 class="woocommerce-loop-product__title"><?php echo  get_the_title(); ?></h5>
+                <span class="price">
+                  <?php $_product = wc_get_product(get_the_ID());
+                  echo $_product->get_price_html(); ?>
+                </span>
+              </a>
+            </li>
+          <?php
+          endwhile;
+          ?>
+
+        </ul>
+      <?php
+        wp_reset_postdata();
+      } else {
+        echo __('No products found', 'bht-tnl');
+      }
+
       ?>
     </div>
 
@@ -445,17 +509,21 @@ function cw_change_product_price_display($price)
 {
   global $product;
 
-  if ($product->is_type('variable') && is_product()) {
-    $price .=
-      '<div class="price-per-serving-wrapper">
-        <span id="price_per_serving_label">' . __("Cena za porcje:", "woocommerce") . '</span>
-        <span id="price_per_serving_value"></span>  ' . get_woocommerce_currency_symbol() . '
-      </div>';
+  // Ensure $product is set and is a WC_Product object
+  if ($product && $product instanceof WC_Product) {
+    // Check if it's a variable product and we're on a single product page
+    if ($product->is_type('variable') && is_product()) {
+      $price .=
+        '<div class="price-per-serving-wrapper">
+              <span id="price_per_serving_label">' . __("Cena za porcje:", "woocommerce") . '</span>
+              <span id="price_per_serving_value"></span>  ' . get_woocommerce_currency_symbol() . '
+          </div>';
+    }
   }
 
   return $price;
 }
-add_filter('woocommerce_get_price_html', 'cw_change_product_price_display', 10, 2);
+add_filter('woocommerce_get_price_html', 'cw_change_product_price_display', 10, 1);
 
 function bbloomer_add_custom_field_to_variation_data($variation_data)
 {

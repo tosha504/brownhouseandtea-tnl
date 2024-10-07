@@ -6,8 +6,11 @@
     "/css-blocks/image-content-bht.css": "/css-blocks/image-content-bht.css",
     "/css-blocks/banner-bht.css": "/css-blocks/banner-bht.css",
     "/src/index.css": "/src/index.css",
+    "/css-blocks/title-banner-page-bht.css": "/css-blocks/title-banner-page-bht.css",
+    "/css-blocks/tiles-bht.css": "/css-blocks/tiles-bht.css",
     "/css-blocks/tea-best-bht.css": "/css-blocks/tea-best-bht.css",
     "/css-blocks/refill-bht.css": "/css-blocks/refill-bht.css",
     "/css-blocks/quiz-bht.css": "/css-blocks/quiz-bht.css",
-    "/css-blocks/product-featured-bht.css": "/css-blocks/product-featured-bht.css"
+    "/css-blocks/product-featured-bht.css": "/css-blocks/product-featured-bht.css",
+    "/css-blocks/meet-our-team-bht.css": "/css-blocks/meet-our-team-bht.css"
 }

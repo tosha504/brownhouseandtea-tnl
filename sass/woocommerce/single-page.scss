@@ -114,6 +114,7 @@ body {
       .cat-and-attr {
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
         list-style: none;
         li {
           background-color: var(--light-green-opacity);

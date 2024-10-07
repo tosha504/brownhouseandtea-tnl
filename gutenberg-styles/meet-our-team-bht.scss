@@ -1,0 +1,50 @@
+@use "../sass/components/_varibles" as v;
+
+.meet-our-team-bht {
+  padding: 25px 0;
+
+  @media (min-width: map-get(v.$grid-breakpoints, md)) {
+    padding: 40px 0;
+  }
+  &__slider,
+  &__card {
+    padding: 55px 0 0;
+    .image-card {
+      border-radius: 25px;
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__slider {
+    .image-card {
+      margin-right: 30px;
+      @media (max-width: map-get(v.$grid-breakpoints, md)) {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  &__card {
+    display: flex;
+    gap: 30px;
+
+    @media (max-width: map-get(v.$grid-breakpoints, md)) {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .image-card {
+      flex: 1 1 100%;
+
+      @media (max-width: map-get(v.$grid-breakpoints, md)) {
+        flex: 0 1 calc(50% - 20px);
+      }
+    }
+  }
+}
