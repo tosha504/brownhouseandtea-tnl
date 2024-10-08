@@ -168,16 +168,30 @@ jQuery(document).ready(function () {
   });
 
   jQuery(window).on("load", function () {
+    jQuery("form.variations_form").on("show_variation", function (event, variation) {
+      if (variation.price_per_serving) {
 
-
-    jQuery(".flex-control-nav.flex-control-thumbs").slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      dots: true,
-      arrows: false,
-      infinite: false,
-      swipe: true,
+        jQuery("#price_per_serving_value").text(variation.price_per_serving);
+      } else {
+        jQuery(".price-per-serving-wrapper").hide();
+      }
     });
+
+    // When no variation is selected or reset
+    jQuery("form.variations_form").on("reset_data", function () {
+      jQuery("#price_per_serving_value").text("");
+    });
+
+    if (jQuery('.flex-control-nav.flex-control-thumbs li').length > 3) {
+      jQuery(".flex-control-nav.flex-control-thumbs").slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: false,
+        infinite: false,
+        swipe: true,
+      }).css('display', 'block');
+    }
 
   })
     .on('click', function () {

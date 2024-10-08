@@ -325,49 +325,6 @@ function filter_update_order_review_fragments($fradments)
 	return $fradments;
 }
 
-function hide_shipping_when_free_is_available($rates, $package)
-{
-	// Initialize variables
-	$free_shipping_available = false;
-	$min_amount = null;
-
-	// Loop through the rates to find free shipping
-	foreach ($rates as $rate_id => $rate) {
-		if ('free_shipping' === $rate->method_id) {
-			// Get the settings for the free shipping rate
-			$free_shipping = new WC_Shipping_Free_Shipping($rate->instance_id);
-			$min_amount = $free_shipping->min_amount;
-			// Check if cart total meets or exceeds the minimum amount for free shipping
-			if (intval(WC()->cart->cart_contents_total) >= intval($min_amount)) {
-				$free_shipping_available = true;
-				break;
-			}
-		}
-	}
-
-	// Modify rates if free shipping is available
-	if ($free_shipping_available) {
-		$new_rates = [];
-
-		// Include free shipping in the new rates
-		foreach ($rates as $rate_id => $rate) {
-			if ('free_shipping' === $rate->method_id) {
-				$new_rates[$rate_id] = $rate;
-			} elseif ('local_pickup' === $rate->method_id) {
-				// Optionally include local pickup
-				$new_rates[$rate_id] = $rate;
-			}
-		}
-
-		return $new_rates; // Return modified rates
-	}
-	error_log(print_r($rates, true));
-	return $rates; // Return all rates if free shipping isn't available
-}
-
-add_filter('woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2);
-
-
 // Function to track post views
 function set_post_views($postID)
 {

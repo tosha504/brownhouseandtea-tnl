@@ -57,7 +57,7 @@ if ($product->get_type() != 'variable') {
   } else {
     $variation_data = $product->get_variation_attributes();
 
-    if (array_key_exists("pa_opakowanie", $variation_data) && count(array_keys($variation_data)) == 1) {
+    if (array_key_exists("pa_opakowanie", $variation_data) && count(array_keys($variation_data)) == 1 || array_key_exists("pa_rozmiar", $variation_data) && count(array_keys($variation_data)) == 1) {
       $children_ids = $product->get_children();
       if ($children_ids) {
         $start_item = '';
@@ -98,10 +98,13 @@ if ($product->get_type() != 'variable') {
                   $image_url = !empty(wp_get_attachment_image_src($variation->get_image_id(), 'medium')[0]) ? 'image-url-data="' . wp_get_attachment_image_src($variation->get_image_id(), 'medium')[0] . '"' :   'image-url-data="' . get_site_url() . '/wp-content/uploads/woocommerce-placeholder-300x300.png"';
                   echo '<li data-id="' . $key . '" data-price="' . $variation_get_price . '" stock-data="' . $variation->get_availability()['class'] . '" sale="' . $sale . '" href-data="' . $href_data . '" ' . $image_url . ' >' . str_replace('Opakowanie: ', '', $variation->get_attribute_summary()) . '</li>';
                 }
+
                 ?>
               </ul>
               <a href=" <?php echo get_site_url() . '?add-to-cart=' . $start_item; ?> " data-quantity="1" class="add_to_cart_button button ajax_add_to_cart <?php if ($start_variation->get_sale_price()) echo 'promotion-btn'; ?>" data-product_id="<?php echo $start_item; ?>" aria-label="<?php echo __('Add', 'undersptra') . get_the_title($start_item) . ' ' . __('to cart', 'bht-tnl'); ?>" rel="nofollow">
-                <?php echo !empty($variation->get_price()) ? '<span class="price-variation">' . number_format($variation->get_price(), 2, ',', ' ') . "</span>" : 0;  ?>
+                <?php
+                $_product = wc_get_product($start_item);
+                echo !empty($variation->get_price()) ? '<span class="price-variation">' . number_format($_product->get_price(), 2, ',', ' ') . "</span>" : 0;  ?>
                 <?php echo get_woocommerce_currency_symbol(); ?> - <?php echo  __('Do koszyka', 'woocommerce'); ?>
               </a>
               <a href="<?php echo get_permalink($product->get_id()); ?>" class="backorder-button loop-not-stock">Powiadom o dostępności</a>

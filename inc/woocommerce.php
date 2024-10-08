@@ -85,7 +85,10 @@ if (!function_exists('bht_tnl_add_woocommerce_support')) {
 remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
-
+add_action('woocommerce_single_product_summary', function () {
+  global $product;
+  echo '<div class="woocommerce-single-price"><span class="price">' . $product->get_price_html() . '</span></div>';
+}, 20);
 
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
@@ -100,6 +103,8 @@ remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_pr
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 add_action('woocommerce_after_single_product', 'product_featured_bht');
+
+
 
 add_action('woocommerce_after_checkout_form', 'product_featured_bht_checkout');
 
@@ -273,6 +278,14 @@ function reassuring_items()
       } ?>
     </div>
   <?php };
+}
+
+// add_action('woocommerce_single_product_summary', 'reassuring_items_', 26);
+function reassuring_items_()
+{
+  if (wc_get_product(get_the_id())->get_type() !== 'simple') {
+    echo '<p>Wybierz opcję:</p>';
+  }
 }
 
 
@@ -482,12 +495,13 @@ function bbloomer_display_custom_field_on_product_page()
       <span id="price_per_serving_label"><?php _e('Price per Serving:', 'woocommerce'); ?></span>
       <span id="price_per_serving_value"></span>
     </div>
-
     <script type="text/javascript">
       jQuery(document).ready(function($) {
         // When the variation is selected, this event is triggered
         $('form.variations_form').on('show_variation', function(event, variation) {
           if (variation.price_per_serving) {
+
+
             $('#price_per_serving_value').text(variation.price_per_serving);
           } else {
             $('#price_per_serving_value').text('<?php _e('N/A', 'woocommerce'); ?>');
@@ -508,7 +522,6 @@ add_filter('woocommerce_available_variation', 'bbloomer_add_custom_field_to_vari
 function cw_change_product_price_display($price)
 {
   global $product;
-
   // Ensure $product is set and is a WC_Product object
   if ($product && $product instanceof WC_Product) {
     // Check if it's a variable product and we're on a single product page

@@ -92,22 +92,24 @@ $footer_after_mage = !empty(get_field('footer_after_mage', 'options_footer')) ? 
 	</div>
 </div>
 <script type="text/javascript">
-	jQuery(document).ready(function($) {
-		// When the variation is selected, this event is triggered
-		$("form.variations_form").on("show_variation", function(event, variation) {
-			if (variation.price_per_serving) {
-				console.log(variation.price_per_serving)
-				$("#price_per_serving_value").text(variation.price_per_serving);
-			} else {
-				$(".price-per-serving-wrapper").hide();
-			}
-		});
+	// jQuery(document).ready(function($) {
+	// 	// When the variation is selected, this event is triggered
+	// 	console.log(jQuery('.price-per-serving-wrapper'));
 
-		// When no variation is selected or reset
-		$("form.variations_form").on("reset_data", function() {
-			$("#price_per_serving_value").text("");
-		});
-	});
+	// 	$("form.variations_form").on("show_variation", function(event, variation) {
+	// 		if (variation.price_per_serving) {
+	// 			console.log(variation.price_per_serving)
+	// 			$("#price_per_serving_value").text(variation.price_per_serving);
+	// 		} else {
+	// 			$(".price-per-serving-wrapper").hide();
+	// 		}
+	// 	});
+
+	// 	// When no variation is selected or reset
+	// 	$("form.variations_form").on("reset_data", function() {
+	// 		$("#price_per_serving_value").text("");
+	// 	});
+	// });
 </script>
 
 
