@@ -210,8 +210,9 @@
           content: "";
           transition: 0.3s;
           display: block;
-          width: 10px;
-          height: 10px;
+          width: 20px;
+          height: 20px;
+          margin-left: 10px;
           background: url(../assets/icons/arrow.svg) no-repeat center/cover;
         }
         @media (max-width: map-get($grid-breakpoints, xl)) {
@@ -234,13 +235,12 @@
             order: 3;
           }
         }
-
-        @media (min-width: map-get($grid-breakpoints, xl)) {
-          .sub-menu {
+        .sub-menu {
+          flex-direction: column;
+          display: none;
+          @media (min-width: map-get($grid-breakpoints, xl)) {
             width: auto;
-            display: none;
             gap: 10px;
-            flex-direction: column;
             position: absolute;
             padding: 20px 20px;
             z-index: 5;

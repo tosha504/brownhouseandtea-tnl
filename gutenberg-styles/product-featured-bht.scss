@@ -112,7 +112,9 @@
     }
     .add-to-cart-wrap,
     .add-to-cart-wrap-single {
-      position: absolute;
+      @media (min-width: map-get(v.$grid-breakpoints, sm)) {
+        position: absolute;
+      }
       bottom: -100%;
       width: 100%;
       background-color: var(--white);

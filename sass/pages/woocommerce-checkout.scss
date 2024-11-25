@@ -271,8 +271,8 @@ body {
 
                               /* Firefox */
                               input[type="number"] {
-                                -moz-appearance: textfield;
-                                pointer-events: none;
+                                // -moz-appearance: textfield;
+                                // pointer-events: none;
                                 padding: 0;
                               }
                             }

@@ -1,0 +1,41 @@
+.wpcf7-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  input[type="radio"] {
+    accent-color: var(--dark-green);
+  }
+  label {
+    font-weight: 400;
+    font-size: 15px;
+    // line-height: 1.3;
+    flex: 1 1 100%;
+  }
+  .wpcf7-spinner {
+    // flex: 1 1 100%;
+  }
+
+  input {
+    margin-top: 10px;
+  }
+
+  p {
+    display: flex;
+  }
+  .button {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-weight: 500;
+    justify-content: center;
+    margin: 10px auto 0;
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

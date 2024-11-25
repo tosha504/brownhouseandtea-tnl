@@ -54,17 +54,3 @@ $wrapper_classes   = apply_filters(
     ?>
   </div>
 </div>
-
-<!-- <div class="product-images slider" id="product-slider">
-  <?php
-  // global $product;
-  // if ($product->is_type('variable')) {
-  //   $variations = $product->get_available_variations();
-  //   foreach ($variations as $variation) {
-  //     $variation_id = $variation['variation_id'];
-  //     $variation_image = $variation['image']['url'];
-  //     echo '<div><img src="' . esc_url($variation_image) . '" alt=""></div>';
-  //   }
-  // }
-  ?>
-</div> -->

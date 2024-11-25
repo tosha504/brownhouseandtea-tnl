@@ -345,7 +345,7 @@ body {
 
       .stock {
         font-size: 14px;
-        color: var(--orange);
+        color: var(--dark-green);
         text-transform: uppercase;
         font-weight: 500;
         margin-bottom: 20px;
@@ -400,6 +400,8 @@ body {
             align-items: center;
             justify-content: center;
             transition: 0.25s;
+            color: var(--dark-green);
+
             @media (hover: hover) {
               &:hover {
                 cursor: pointer;
@@ -421,8 +423,8 @@ body {
 
           /* Firefox */
           input[type="number"] {
-            -moz-appearance: textfield;
-            pointer-events: none;
+            // -moz-appearance: textfield;
+            // pointer-events: none;
             padding: 0;
           }
         }

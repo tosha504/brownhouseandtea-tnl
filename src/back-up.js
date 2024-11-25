@@ -169,9 +169,9 @@ jQuery(document).ready(function () {
 
   jQuery(window).on("load", function () {
     jQuery("form.variations_form").on("show_variation", function (event, variation) {
-      jQuery(".price-per-serving-wrapper").hide();
+
+
       if (variation.price_per_serving) {
-        jQuery(".price-per-serving-wrapper").show();
         jQuery("#price_per_serving_value").text(variation.price_per_serving);
       } else {
         jQuery(".price-per-serving-wrapper").hide();
@@ -179,11 +179,12 @@ jQuery(document).ready(function () {
     });
 
     // When no variation is selected or reset
-    // jQuery("form.variations_form").on("reset_data", function () {
-    //   console.log(1);
+    jQuery("form.variations_form").on("reset_data", function () {
+      jQuery("#price_per_serving_value").text("");
+    });
 
-    //   jQuery("#price_per_serving_value").text("");
-    // });
+
+
 
     if (jQuery('.flex-control-nav.flex-control-thumbs li').length > 3) {
       jQuery(".flex-control-nav.flex-control-thumbs").slick({
@@ -196,24 +197,13 @@ jQuery(document).ready(function () {
       }).css('display', 'block');
     }
 
-
-
   })
     .on('click', function () {
       jQuery('.woocommerce-product-gallery__image.flex-active-slide img').css({ 'height': jQuery('.woocommerce-product-gallery__image.flex-active-slide img').innerWidth(), "border-radius": "20px" })
     })
 
-  if (jQuery('.cross-sells .products li').length > 2) {
 
-    jQuery('.cross-sells .products').slick({
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      dots: true,
-      arrows: false,
-      infinite: false,
-      swipe: true,
-    })
-  }
+
 
   jQuery('#checkout_apply_coupon').click(function (ev) {
     ev.preventDefault();
@@ -243,20 +233,8 @@ jQuery(document).ready(function () {
       jQuery(this).removeClass('active')
       body.removeClass("fixed-page")
     }
+
   })
-
-
-
-  let timeout;
-  jQuery('.woocommerce').on('change', 'input.qty', function () {
-    if (timeout !== undefined) {
-      clearTimeout(timeout);
-    }
-    timeout = setTimeout(function () {
-      jQuery("[name='update_cart']").trigger("click"); // trigger cart update
-    }, 100); // 1 second delay, half a second (500) seems comfortable too
-  });
-
 
   //shop-page
   jQuery('.filter-call').on('click', function (e) {
@@ -272,10 +250,9 @@ jQuery(document).ready(function () {
     jQuery('.overlay').removeClass('active')
   })
 
-  if (jQuery(window).width() > 576 && jQuery(window).width() < 990) {
+  if (jQuery(window).width() < 990) {
     jQuery('.products .woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
       e.preventDefault()
-
       const siblingsChildren = jQuery(this).parent().siblings().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
       const curerentChildren = jQuery(this).parent().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
       if (siblingsChildren.hasClass('active')) {
@@ -288,7 +265,6 @@ jQuery(document).ready(function () {
         curerentChildren.addClass('active');
       }
     })
-
   }
 
   jQuery('.variations_form').on('show_variation', function (event, variation) {

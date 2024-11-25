@@ -325,6 +325,7 @@ function filter_update_order_review_fragments($fradments)
 	return $fradments;
 }
 
+
 // Function to track post views
 function set_post_views($postID)
 {

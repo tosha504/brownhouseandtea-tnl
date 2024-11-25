@@ -144,7 +144,9 @@ jQuery(document).ready(function () {
   });
   jQuery(window).on("load", function () {
     jQuery("form.variations_form").on("show_variation", function (event, variation) {
+      jQuery(".price-per-serving-wrapper").hide();
       if (variation.price_per_serving) {
+        jQuery(".price-per-serving-wrapper").show();
         jQuery("#price_per_serving_value").text(variation.price_per_serving);
       } else {
         jQuery(".price-per-serving-wrapper").hide();
@@ -152,9 +154,12 @@ jQuery(document).ready(function () {
     });
 
     // When no variation is selected or reset
-    jQuery("form.variations_form").on("reset_data", function () {
-      jQuery("#price_per_serving_value").text("");
-    });
+    // jQuery("form.variations_form").on("reset_data", function () {
+    //   console.log(1);
+
+    //   jQuery("#price_per_serving_value").text("");
+    // });
+
     if (jQuery('.flex-control-nav.flex-control-thumbs li').length > 3) {
       jQuery(".flex-control-nav.flex-control-thumbs").slick({
         slidesToShow: 3,
@@ -171,6 +176,16 @@ jQuery(document).ready(function () {
       "border-radius": "20px"
     });
   });
+  if (jQuery('.cross-sells .products li').length > 2) {
+    jQuery('.cross-sells .products').slick({
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      dots: true,
+      arrows: false,
+      infinite: false,
+      swipe: true
+    });
+  }
   jQuery('#checkout_apply_coupon').click(function (ev) {
     ev.preventDefault();
     var code = jQuery('#checkout_coupon_code').val();
@@ -199,6 +214,15 @@ jQuery(document).ready(function () {
       body.removeClass("fixed-page");
     }
   });
+  var timeout;
+  jQuery('.woocommerce').on('change', 'input.qty', function () {
+    if (timeout !== undefined) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(function () {
+      jQuery("[name='update_cart']").trigger("click"); // trigger cart update
+    }, 100); // 1 second delay, half a second (500) seems comfortable too
+  });
 
   //shop-page
   jQuery('.filter-call').on('click', function (e) {
@@ -213,7 +237,7 @@ jQuery(document).ready(function () {
     body.removeClass("fixed-page");
     jQuery('.overlay').removeClass('active');
   });
-  if (jQuery(window).width() < 990) {
+  if (jQuery(window).width() > 576 && jQuery(window).width() < 990) {
     jQuery('.products .woocommerce-LoopProduct-link.woocommerce-loop-product__link').on('click', function (e) {
       e.preventDefault();
       var siblingsChildren = jQuery(this).parent().siblings().children('.add-to-cart-wrap ,.add-to-cart-wrap-single');
